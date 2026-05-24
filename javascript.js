@@ -10738,7 +10738,7 @@ function speakWord(word, accent) {
   let utterance = new SpeechSynthesisUtterance(word);
   let voices = window.speechSynthesis.getVoices();
   let targetVoice = voices.find((v) =>
-    accent === "uk"
+    accent === "en-GB" || accent === "uk"
       ? v.lang === "en-GB" || v.lang === "en_GB"
       : v.lang === "en-US" || v.lang === "en_US",
   );
