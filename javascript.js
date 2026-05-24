@@ -102,455 +102,519 @@ const courseData = [
             ipa: "/ˈtiːtʃər/",
             pos: "Danh từ (n)",
             imageUrl:
-              "https://img.magnific.com/free-photo/front-view-young-beautiful-lady-white-t-shirt-black-jeans-coat-holding-green-book-pen-smiling-white_140725-18658.jpg",
+              "https://images.unsplash.com/photo-1598534781514-6857b5e8a3c7?w=400&h=300&fit=crop",
           },
           {
             word: "doctor",
             definition: "bác sĩ",
             ipa: "/ˈdɒktər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1612349317150-e71f8a66081f?w=400&h=300&fit=crop",
           },
           {
             word: "nurse",
             definition: "y tá",
             ipa: "/nɜːrs/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1579154204601-01d82b27e763?w=400&h=300&fit=crop",
           },
           {
             word: "police officer",
             definition: "cảnh sát",
             ipa: "/pəˈliːs ˈɒfɪsər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1516457881100-e329e8281ab3?w=400&h=300&fit=crop",
           },
           {
             word: "firefighter",
             definition: "lính cứu hỏa",
             ipa: "/ˈfaɪərfaɪtər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1589322632892-8d6f8df6c0e2?w=400&h=300&fit=crop",
           },
           {
             word: "chef",
             definition: "đầu bếp",
             ipa: "/ʃef/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1583522588019-e44c3f0d6371?w=400&h=300&fit=crop",
           },
           {
             word: "waiter / waitress",
             definition: "bồi bàn nam / nữ",
             ipa: "/ˈweɪtər/ / /ˈweɪtrəs/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1585033649888-c1d76de2db88?w=400&h=300&fit=crop",
           },
           {
             word: "farmer",
             definition: "nông dân",
             ipa: "/ˈfɑːrmər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop",
           },
           {
             word: "driver",
             definition: "tài xế",
             ipa: "/ˈdraɪvər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1531746790731-6c087fecd65b?w=400&h=300&fit=crop",
           },
           {
             word: "student",
             definition: "học sinh / sinh viên",
             ipa: "/ˈstjuːdənt/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=300&fit=crop",
           },
           {
             word: "head",
             definition: "cái đầu",
             ipa: "/hed/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
           },
           {
             word: "hair",
             definition: "tóc",
             ipa: "/her/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1560807707-8cc77767d783?w=400&h=300&fit=crop",
           },
           {
             word: "face",
             definition: "khuôn mặt",
             ipa: "/feɪs/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1539571696357-5a69c006ae05?w=400&h=300&fit=crop",
           },
           {
             word: "eye",
             definition: "con mắt",
             ipa: "/aɪ/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
           },
           {
             word: "ear",
             definition: "lỗ tai",
             ipa: "/ɪr/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552984562-40f088d1120d?w=400&h=300&fit=crop",
           },
           {
             word: "nose",
             definition: "mũi",
             ipa: "/noʊz/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1539571696357-5a69c006ae05?w=400&h=300&fit=crop",
           },
           {
             word: "mouth",
             definition: "miệng",
             ipa: "/maʊθ/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop",
           },
           {
             word: "tooth / teeth",
             definition: "răng (số ít / nhiều)",
             ipa: "/tuːθ/ / /tiːθ/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1543827519-e21cc028cb29?w=400&h=300&fit=crop",
           },
           {
             word: "neck",
             definition: "cái cổ",
             ipa: "/nek/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1524654522494-0c6984f0f99a?w=400&h=300&fit=crop",
           },
           {
             word: "shoulder",
             definition: "vai",
             ipa: "/ˈʃoʊldər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1526336024174-c27aeeb361ec?w=400&h=300&fit=crop",
           },
           {
             word: "arm",
             definition: "cánh tay",
             ipa: "/ɑːrm/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552847519-e0c2c14e23d2?w=400&h=300&fit=crop",
           },
           {
             word: "hand",
             definition: "bàn tay",
             ipa: "/hænd/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1589322632892-8d6f8df6c0e2?w=400&h=300&fit=crop",
           },
           {
             word: "finger",
             definition: "ngón tay",
             ipa: "/ˈfɪŋɡər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1603254365970-e902b1ef9d88?w=400&h=300&fit=crop",
           },
           {
             word: "leg",
             definition: "đôi chân",
             ipa: "/leɡ/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop",
           },
           {
             word: "knee",
             definition: "đầu gối",
             ipa: "/niː/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1517836304202-59c4760db3b7?w=400&h=300&fit=crop",
           },
           {
             word: "foot / feet",
             definition: "bàn chân (ít / nhiều)",
             ipa: "/fʊt/ / /fiːt/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
           },
           {
             word: "wake up",
             definition: "tỉnh giấc",
             ipa: "/weɪk ʌp/",
             pos: "Cụm động từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1505228395891-9a51e7e86e81?w=400&h=300&fit=crop",
           },
           {
             word: "get up",
             definition: "thức dậy",
             ipa: "/ɡet ʌp/",
             pos: "Cụm động từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=300&fit=crop",
           },
           {
             word: "brush my teeth",
             definition: "đánh răng của tôi",
             ipa: "/brʌʃ maɪ tiːθ/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1522337360788-8b13dee7a537?w=400&h=300&fit=crop",
           },
           {
             word: "wash my face",
             definition: "rửa mặt của tôi",
             ipa: "/wɒʃ maɪ feɪs/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1545231994-bb4ba19b7ce9?w=400&h=300&fit=crop",
           },
           {
             word: "take a shower",
             definition: "tắm vòi sen",
             ipa: "/teɪk ə ˈʃaʊər/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop",
           },
           {
             word: "get dressed",
             definition: "mặc quần áo",
             ipa: "/ɡet drest/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1506751787946-51fb0ee888b2?w=400&h=300&fit=crop",
           },
           {
             word: "have breakfast",
             definition: "ăn sáng",
             ipa: "/hæv ˈbrekfəst/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1525431014915-c3400ca199e7?w=400&h=300&fit=crop",
           },
           {
             word: "go to school",
             definition: "đi học",
             ipa: "/ɡoʊ tə skuːl/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1452976426143-20e76ea3ced8?w=400&h=300&fit=crop",
           },
           {
             word: "study",
             definition: "học bài",
             ipa: "/ˈstʌdi/",
             pos: "Động từ (v)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1456593348674-b545520a8fed?w=400&h=300&fit=crop",
           },
           {
             word: "have lunch",
             definition: "ăn trưa",
             ipa: "/hæv lʌntʃ/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop",
           },
           {
             word: "play with friends",
             definition: "chơi với bạn bè",
             ipa: "/pleɪ wɪð frendz/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=300&fit=crop",
           },
           {
             word: "do homework",
             definition: "làm bài tập",
             ipa: "/duː ˈhoʊmwɜːrk/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1456593348674-b545520a8fed?w=400&h=300&fit=crop",
           },
           {
             word: "watch TV",
             definition: "xem tivi",
             ipa: "/wɒtʃ tiːˈviː/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1518611505868-48a7a3fbd8d8?w=400&h=300&fit=crop",
           },
           {
             word: "have dinner",
             definition: "ăn tối",
             ipa: "/hæv ˈdɪnər/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
           },
           {
             word: "go to bed",
             definition: "đi ngủ",
             ipa: "/ɡoʊ tə bed/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1505228395891-9a51e7e86e81?w=400&h=300&fit=crop",
           },
           {
             word: "read a book",
             definition: "đọc sách",
             ipa: "/riːd ə bʊk/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&h=300&fit=crop",
           },
           {
             word: "listen to music",
             definition: "nghe nhạc",
             ipa: "/ˈlɪsən tə ˈmjuːzɪk/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop",
           },
           {
             word: "clean the room",
             definition: "dọn dẹp phòng",
             ipa: "/kliːn ðə ruːm/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1545812519-c9cddd61f380?w=400&h=300&fit=crop",
           },
           {
             word: "cook dinner",
             definition: "nấu bữa tối",
             ipa: "/kʊk ˈdɪnər/",
             pos: "Cụm từ",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1556910103-663c02c02e1a?w=400&h=300&fit=crop",
           },
           {
             word: "family",
             definition: "gia đình",
             ipa: "/ˈfæməli/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=300&fit=crop",
           },
           {
             word: "father / dad",
             definition: "bố / ba",
             ipa: "/ˈfɑːðər/ / /dæd/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
           },
           {
             word: "mother / mom",
             definition: "mẹ / má",
             ipa: "/ˈmʌðər/ / /mɒm/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1502764613149-7f2d8b13bcff?w=400&h=300&fit=crop",
           },
           {
             word: "parents",
             definition: "bố mẹ",
             ipa: "/ˈpeərənts/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=300&fit=crop",
           },
           {
             word: "son",
             definition: "con trai",
             ipa: "/sʌn/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1503454537688-e47546fe5038?w=400&h=300&fit=crop",
           },
           {
             word: "daughter",
             definition: "con gái",
             ipa: "/ˈdɔːtər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=300&fit=crop",
           },
           {
             word: "brother",
             definition: "anh/em trai",
             ipa: "/ˈbrʌðər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=300&fit=crop",
           },
           {
             word: "sister",
             definition: "chị/em gái",
             ipa: "/ˈsɪstər/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1493866671281-8860bca6a081?w=400&h=300&fit=crop",
           },
           {
             word: "grandfather / grandpa",
             definition: "ông",
             ipa: "/ˈɡrænfɑːðər/ / /ˈɡræn.pɑː/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
           },
           {
             word: "grandmother / grandma",
             definition: "bà",
             ipa: "/ˈɡrænmʌðər/ / /ˈɡræn.mɑː/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1502764613149-7f2d8b13bcff?w=400&h=300&fit=crop",
           },
           {
             word: "grandparents",
             definition: "ông bà",
             ipa: "/ˈɡrænpeərənts/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=300&fit=crop",
           },
           {
             word: "uncle",
             definition: "chú/bác/cậu",
             ipa: "/ˈʌŋkl/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
           },
           {
             word: "aunt",
             definition: "cô/dì/bác gái",
             ipa: "/ænt/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1502764613149-7f2d8b13bcff?w=400&h=300&fit=crop",
           },
           {
             word: "cousin",
             definition: "anh/chị/em họ",
             ipa: "/ˈkʌzn/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=300&fit=crop",
           },
           {
             word: "husband",
             definition: "chồng",
             ipa: "/ˈhʌzbənd/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
           },
           {
             word: "wife",
             definition: "vợ",
             ipa: "/waɪf/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1502764613149-7f2d8b13bcff?w=400&h=300&fit=crop",
           },
           {
             word: "nephew",
             definition: "cháu trai",
             ipa: "/ˈnefjuː/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1503454537688-e47546fe5038?w=400&h=300&fit=crop",
           },
           {
             word: "niece",
             definition: "cháu gái",
             ipa: "/niːs/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=300&fit=crop",
           },
           {
             word: "child / children",
             definition: "đứa trẻ / những đứa trẻ",
             ipa: "/tʃaɪld/ / /ˈtʃɪldrən/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1503454537688-e47546fe5038?w=400&h=300&fit=crop",
           },
           {
             word: "baby",
             definition: "em bé",
             ipa: "/ˈbeɪbi/",
             pos: "Danh từ (n)",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1515488846690-b0988ed1f938?w=400&h=300&fit=crop",
           },
         ],
       },
@@ -564,7 +628,8 @@ const courseData = [
             ipa: "/ˈfʊtbɔːl/",
             definition: "bóng đá",
             example: "He plays football every weekend.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=300&fit=crop",
           },
           {
             word: "correct",
@@ -572,7 +637,8 @@ const courseData = [
             ipa: "/kəˈrekt/",
             definition: "đúng",
             example: "Your answer is correct.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
           },
           {
             word: "correct",
@@ -588,7 +654,8 @@ const courseData = [
             ipa: "/ˈletər/",
             definition: "thư; chữ cái",
             example: "She wrote a formal letter.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "lunch",
@@ -596,7 +663,8 @@ const courseData = [
             ipa: "/lʌntʃ/",
             definition: "bữa trưa",
             example: "We have lunch at noon.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
           },
           {
             word: "lunch",
@@ -612,7 +680,8 @@ const courseData = [
             ipa: "/ˈmænɪdʒər/",
             definition: "quản lý",
             example: "The manager approved the request.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "project",
@@ -620,7 +689,8 @@ const courseData = [
             ipa: "/ˈprɑːdʒekt/",
             definition: "dự án",
             example: "The team completed the project on time.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "project",
@@ -716,7 +786,8 @@ const courseData = [
             ipa: "/ˈerpleɪn/",
             definition: "máy bay",
             example: "The airplane landed safely.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "drawer",
@@ -732,7 +803,8 @@ const courseData = [
             ipa: "/ˈtelɪskoʊp/",
             definition: "kính thiên văn",
             example: "He observed the stars with a telescope.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&h=300&fit=crop",
           },
           {
             word: "bicycle",
@@ -740,7 +812,8 @@ const courseData = [
             ipa: "/ˈbaɪsɪkl/",
             definition: "xe đạp",
             example: "She rides her bicycle to school.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
           },
           {
             word: "instrument",
@@ -748,7 +821,8 @@ const courseData = [
             ipa: "/ˈɪnstrəmənt/",
             definition: "nhạc cụ; dụng cụ",
             example: "The surgeon used a medical instrument.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&h=300&fit=crop",
           },
           {
             word: "laboratory",
@@ -756,7 +830,8 @@ const courseData = [
             ipa: "/ˈlæbrətɔːri/",
             definition: "phòng thí nghiệm",
             example: "The experiment was conducted in a laboratory.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
           },
           {
             word: "equipment",
@@ -764,7 +839,8 @@ const courseData = [
             ipa: "/ɪˈkwɪpmənt/",
             definition: "thiết bị",
             example: "New equipment was installed.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "the front of",
@@ -772,7 +848,8 @@ const courseData = [
             ipa: "/ðə frʌnt əv/",
             definition: "phía trước của",
             example: "She stood at the front of the room.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "carry",
@@ -780,7 +857,8 @@ const courseData = [
             ipa: "/ˈkæri/",
             definition: "mang, vác",
             example: "He carried a heavy box.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "cross",
@@ -788,7 +866,8 @@ const courseData = [
             ipa: "/krɔːs/",
             definition: "băng qua",
             example: "She crossed the street carefully.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "examine",
@@ -796,7 +875,8 @@ const courseData = [
             ipa: "/ɪɡˈzæmɪn/",
             definition: "kiểm tra, xem xét",
             example: "The doctor will examine the patient.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
           },
           {
             word: "handle",
@@ -804,7 +884,8 @@ const courseData = [
             ipa: "/ˈhændl/",
             definition: "xử lý",
             example: "She can handle customer complaints.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "move",
@@ -812,7 +893,8 @@ const courseData = [
             ipa: "/muːv/",
             definition: "di chuyển",
             example: "They moved to a new office.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "move",
@@ -820,7 +902,8 @@ const courseData = [
             ipa: "/muːv/",
             definition: "bước đi, hành động",
             example: "That was a smart move.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "pack",
@@ -828,7 +911,8 @@ const courseData = [
             ipa: "/pæk/",
             definition: "đóng gói",
             example: "He packed his suitcase.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1469022563149-aa64dbd37dae?w=400&h=300&fit=crop",
           },
           {
             word: "push",
@@ -836,7 +920,8 @@ const courseData = [
             ipa: "/pʊʃ/",
             definition: "đẩy",
             example: "She pushed the cart.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "reach for",
@@ -844,7 +929,8 @@ const courseData = [
             ipa: "/riːtʃ fɔːr/",
             definition: "với lấy",
             example: "He reached for the book.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&h=300&fit=crop",
           },
           {
             word: "read",
@@ -892,7 +978,8 @@ const courseData = [
             ipa: "/prəˈduːs/",
             definition: "sản xuất",
             example: "The factory produces cars.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "produce",
@@ -900,7 +987,8 @@ const courseData = [
             ipa: "/ˈprɑːduːs/",
             definition: "nông sản",
             example: "Fresh produce is available here.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1488459716781-6f3ee893583b?w=400&h=300&fit=crop",
           },
           {
             word: "patient",
@@ -908,7 +996,8 @@ const courseData = [
             ipa: "/ˈpeɪʃnt/",
             definition: "bệnh nhân",
             example: "The nurse helped the patient.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
           },
           {
             word: "suitcase",
@@ -924,7 +1013,8 @@ const courseData = [
             ipa: "/ˈɡɑːrdnər/",
             definition: "người làm vườn",
             example: "The gardener planted new flowers.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1416879295882-3373a0480b5b?w=400&h=300&fit=crop",
           },
           {
             word: "empty",
@@ -932,7 +1022,8 @@ const courseData = [
             ipa: "/ˈempti/",
             definition: "trống rỗng",
             example: "The room is empty.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "empty",
@@ -940,7 +1031,8 @@ const courseData = [
             ipa: "/ˈempti/",
             definition: "làm trống",
             example: "Please empty the trash bin.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "wheelbarrow",
@@ -956,7 +1048,8 @@ const courseData = [
             ipa: "/ˈnuːzˌpeɪpər/",
             definition: "báo",
             example: "She reads the newspaper every morning.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "shore",
@@ -964,7 +1057,8 @@ const courseData = [
             ipa: "/ʃɔːr/",
             definition: "bờ biển",
             example: "They walked along the shore.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=300&fit=crop",
           },
           {
             word: "change",
@@ -972,7 +1066,8 @@ const courseData = [
             ipa: "/tʃeɪndʒ/",
             definition: "thay đổi",
             example: "The company plans to change its policy.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "change",
@@ -980,7 +1075,8 @@ const courseData = [
             ipa: "/tʃeɪndʒ/",
             definition: "sự thay đổi",
             example: "There has been a major change in management.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "clean",
@@ -988,7 +1084,8 @@ const courseData = [
             ipa: "/kliːn/",
             definition: "lau dọn",
             example: "She cleaned the office.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "clean",
@@ -996,7 +1093,8 @@ const courseData = [
             ipa: "/kliːn/",
             definition: "sạch",
             example: "The room is clean.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "cook",
@@ -1004,7 +1102,8 @@ const courseData = [
             ipa: "/kʊk/",
             definition: "nấu ăn",
             example: "He cooks dinner every evening.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "cook",
@@ -1020,7 +1119,8 @@ const courseData = [
             ipa: "/dɪˈlɪvər/",
             definition: "giao hàng; trình bày",
             example: "The company will deliver the package tomorrow.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "do",
@@ -1028,7 +1128,8 @@ const courseData = [
             ipa: "/duː/",
             definition: "làm",
             example: "She does her homework at night.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "eat",
@@ -1036,7 +1137,8 @@ const courseData = [
             ipa: "/iːt/",
             definition: "ăn",
             example: "They are eating lunch.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "enter",
@@ -1044,7 +1146,8 @@ const courseData = [
             ipa: "/ˈentər/",
             definition: "đi vào; nhập (dữ liệu)",
             example: "Please enter your password.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "exit",
@@ -1052,7 +1155,8 @@ const courseData = [
             ipa: "/ˈeksɪt/",
             definition: "đi ra",
             example: "Employees must exit through the main door.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "exit",
@@ -1060,7 +1164,8 @@ const courseData = [
             ipa: "/ˈeksɪt/",
             definition: "lối ra",
             example: "The exit is on the left.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "fish",
@@ -1068,7 +1173,8 @@ const courseData = [
             ipa: "/fɪʃ/",
             definition: "câu cá",
             example: "They are fishing by the lake.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
           },
           {
             word: "fish",
@@ -1076,7 +1182,8 @@ const courseData = [
             ipa: "/fɪʃ/",
             definition: "cá",
             example: "He caught a large fish.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
           },
           {
             word: "focus",
@@ -1084,7 +1191,8 @@ const courseData = [
             ipa: "/ˈfoʊkəs/",
             definition: "tập trung",
             example: "We need to focus on customer service.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "focus",
@@ -1092,7 +1200,8 @@ const courseData = [
             ipa: "/ˈfoʊkəs/",
             definition: "sự tập trung",
             example: "The main focus is improving quality.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "board",
@@ -1100,7 +1209,8 @@ const courseData = [
             ipa: "/bɔːrd/",
             definition: "lên (tàu, máy bay)",
             example: "Passengers are boarding the plane.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "board",
@@ -1116,7 +1226,8 @@ const courseData = [
             ipa: "/fuːd/",
             definition: "thức ăn",
             example: "The restaurant serves healthy food.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "mail",
@@ -1124,7 +1235,8 @@ const courseData = [
             ipa: "/meɪl/",
             definition: "thư từ",
             example: "I checked my mail this morning.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1595521624375-6f0ee7a3d835?w=400&h=300&fit=crop",
           },
           {
             word: "mail",
@@ -1132,7 +1244,8 @@ const courseData = [
             ipa: "/meɪl/",
             definition: "gửi thư",
             example: "She mailed the package yesterday.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1595521624375-6f0ee7a3d835?w=400&h=300&fit=crop",
           },
           {
             word: "construction",
@@ -1156,7 +1269,8 @@ const courseData = [
             ipa: "/miːl/",
             definition: "bữa ăn",
             example: "Breakfast is my favorite meal.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "passenger",
@@ -1164,7 +1278,8 @@ const courseData = [
             ipa: "/ˈpæsɪndʒər/",
             definition: "hành khách",
             example: "The passengers are waiting to board.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "gather",
@@ -1188,7 +1303,8 @@ const courseData = [
             ipa: "/ɡet aʊt əv/",
             definition: "ra khỏi",
             example: "He got out of the car.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "go up",
@@ -1196,7 +1312,8 @@ const courseData = [
             ipa: "/ɡoʊ ʌp/",
             definition: "tăng lên; đi lên",
             example: "Prices have gone up recently.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1460925895917-adf4e565e479?w=400&h=300&fit=crop",
           },
           {
             word: "greet",
@@ -1204,7 +1321,8 @@ const courseData = [
             ipa: "/ɡriːt/",
             definition: "chào hỏi",
             example: "The manager greeted the guests.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "sign",
@@ -1212,7 +1330,8 @@ const courseData = [
             ipa: "/saɪn/",
             definition: "ký tên",
             example: "Please sign the contract.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "sign",
@@ -1220,7 +1339,8 @@ const courseData = [
             ipa: "/saɪn/",
             definition: "biển báo; chữ ký",
             example: "There is a warning sign ahead.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "lay",
@@ -1228,7 +1348,8 @@ const courseData = [
             ipa: "/leɪ/",
             definition: "đặt xuống (có tân ngữ)",
             example: "She laid the book on the table.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&h=300&fit=crop",
           },
           {
             word: "lean",
@@ -1236,7 +1357,8 @@ const courseData = [
             ipa: "/liːn/",
             definition: "dựa vào",
             example: "He leaned against the wall.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "lift",
@@ -1244,7 +1366,8 @@ const courseData = [
             ipa: "/lɪft/",
             definition: "nhấc lên",
             example: "She lifted the box carefully.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "lift",
@@ -1252,7 +1375,8 @@ const courseData = [
             ipa: "/lɪft/",
             definition: "thang máy (BrE); sự nâng",
             example: "Take the lift to the 5th floor.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "light",
@@ -1260,7 +1384,8 @@ const courseData = [
             ipa: "/laɪt/",
             definition: "ánh sáng; đèn",
             example: "The light is very bright.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "light",
@@ -1268,7 +1393,8 @@ const courseData = [
             ipa: "/laɪt/",
             definition: "nhẹ",
             example: "This bag is very light.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "light",
@@ -1276,7 +1402,8 @@ const courseData = [
             ipa: "/laɪt/",
             definition: "thắp (đèn, nến)",
             example: "He lit the candle.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "outdoor event",
@@ -1292,7 +1419,8 @@ const courseData = [
             ipa: "/brɪk/",
             definition: "viên gạch",
             example: "The wall is made of bricks.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "candle",
@@ -1300,7 +1428,8 @@ const courseData = [
             ipa: "/ˈkændl/",
             definition: "cây nến",
             example: "She lit a candle.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1483793867209-2c5c49a5d4c6?w=400&h=300&fit=crop",
           },
           {
             word: "a match",
@@ -1324,7 +1453,8 @@ const courseData = [
             ipa: "/pæs/",
             definition: "đi ngang qua; vượt qua",
             example: "He passed the building.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "pass",
@@ -1332,7 +1462,8 @@ const courseData = [
             ipa: "/pæs/",
             definition: "thẻ; vé",
             example: "Show your boarding pass.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "pick up",
@@ -1340,7 +1471,8 @@ const courseData = [
             ipa: "/pɪk ʌp/",
             definition: "nhặt lên; đón",
             example: "She picked up the phone.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "point",
@@ -1348,7 +1480,8 @@ const courseData = [
             ipa: "/pɔɪnt/",
             definition: "chỉ vào",
             example: "He pointed at the screen.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "point",
@@ -1364,7 +1497,8 @@ const courseData = [
             ipa: "/pʊt/",
             definition: "đặt",
             example: "She put the keys on the table.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "rearrange",
@@ -1380,7 +1514,8 @@ const courseData = [
             ipa: "/rɪˈper/",
             definition: "sửa chữa",
             example: "He repaired the computer.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "repair",
@@ -1388,7 +1523,8 @@ const courseData = [
             ipa: "/rɪˈper/",
             definition: "sự sửa chữa",
             example: "The car is under repair.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "rest",
@@ -1396,7 +1532,8 @@ const courseData = [
             ipa: "/rest/",
             definition: "nghỉ ngơi; tựa vào",
             example: "She rested her head on the desk.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "rest",
@@ -1404,7 +1541,8 @@ const courseData = [
             ipa: "/rest/",
             definition: "phần còn lại; sự nghỉ ngơi",
             example: "Take a short rest.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "pour",
@@ -1420,7 +1558,8 @@ const courseData = [
             ipa: "/rɪˈvjuː/",
             definition: "xem xét lại",
             example: "The manager will review the report.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "review",
@@ -1428,7 +1567,8 @@ const courseData = [
             ipa: "/rɪˈvjuː/",
             definition: "bản đánh giá",
             example: "The product received a positive review.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "furniture",
@@ -1444,7 +1584,8 @@ const courseData = [
             ipa: "/rʌn/",
             definition: "chạy; vận hành",
             example: "She runs every morning. / He runs a small business.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=300&fit=crop",
           },
           {
             word: "speak",
@@ -1452,7 +1593,8 @@ const courseData = [
             ipa: "/spiːk/",
             definition: "nói",
             example: "She speaks three languages.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "trim",
@@ -1460,7 +1602,8 @@ const courseData = [
             ipa: "/trɪm/",
             definition: "cắt tỉa",
             example: "He trimmed the bushes.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1416879295882-3373a0480b5b?w=400&h=300&fit=crop",
           },
           {
             word: "type",
@@ -1468,7 +1611,8 @@ const courseData = [
             ipa: "/taɪp/",
             definition: "đánh máy",
             example: "She is typing a report.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
           },
           {
             word: "type",
@@ -1562,7 +1706,8 @@ const courseData = [
             ipa: "/kɑːr/",
             definition: "xe hơi",
             example: "He parked his car.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "boat",
@@ -1570,7 +1715,8 @@ const courseData = [
             ipa: "/boʊt/",
             definition: "thuyền nhỏ",
             example: "A boat is sailing on the river.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1509395062184-c1db26e2f3c0?w=400&h=300&fit=crop",
           },
           {
             word: "ship",
@@ -1578,7 +1724,8 @@ const courseData = [
             ipa: "/ʃɪp/",
             definition: "tàu lớn",
             example: "The cargo ship arrived.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=300&fit=crop",
           },
           {
             word: "train",
@@ -1586,7 +1733,8 @@ const courseData = [
             ipa: "/treɪn/",
             definition: "tàu hỏa",
             example: "The train is arriving.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "airplane",
@@ -1594,7 +1742,8 @@ const courseData = [
             ipa: "/ˈerpleɪn/",
             definition: "máy bay",
             example: "The airplane is taking off.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "vehicle",
@@ -1602,7 +1751,8 @@ const courseData = [
             ipa: "/ˈviːəkl/",
             definition: "phương tiện",
             example: "Many vehicles are parked outside.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "bicycle",
@@ -1610,7 +1760,8 @@ const courseData = [
             ipa: "/ˈbaɪsɪkl/",
             definition: "xe đạp",
             example: "She rides a bicycle.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
           },
           {
             word: "truck",
@@ -1618,7 +1769,8 @@ const courseData = [
             ipa: "/trʌk/",
             definition: "xe tải",
             example: "The truck is unloading goods.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "platform",
@@ -1626,7 +1778,8 @@ const courseData = [
             ipa: "/ˈplætfɔːrm/",
             definition: "sân ga",
             example: "Passengers are waiting on the platform.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "intersection",
@@ -1642,7 +1795,8 @@ const courseData = [
             ipa: "/ˈreɪlweɪ/",
             definition: "đường sắt",
             example: "The railway connects two cities.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "highway",
@@ -1650,7 +1804,8 @@ const courseData = [
             ipa: "/ˈhaɪweɪ/",
             definition: "đường cao tốc",
             example: "The highway is very busy.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "dock",
@@ -1666,7 +1821,8 @@ const courseData = [
             ipa: "/krɔːs ə brɪdʒ/",
             definition: "băng qua cầu",
             example: "They crossed a bridge.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "building",
@@ -1674,7 +1830,8 @@ const courseData = [
             ipa: "/ˈbɪldɪŋ/",
             definition: "tòa nhà",
             example: "The office building is tall.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=300&fit=crop",
           },
           {
             word: "bridge",
@@ -1682,7 +1839,8 @@ const courseData = [
             ipa: "/brɪdʒ/",
             definition: "cây cầu",
             example: "The bridge spans the river.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "area",
@@ -1722,7 +1880,8 @@ const courseData = [
             ipa: "/lɔːn/",
             definition: "bãi cỏ",
             example: "He is mowing the lawn.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1416879295882-3373a0480b5b?w=400&h=300&fit=crop",
           },
           {
             word: "flowerpot",
@@ -1738,7 +1897,8 @@ const courseData = [
             ipa: "/tʃer/",
             definition: "ghế",
             example: "She is sitting on a chair.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
           },
           {
             word: "table",
@@ -1746,7 +1906,8 @@ const courseData = [
             ipa: "/ˈteɪbl/",
             definition: "bàn",
             example: "The book is on the table.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
           },
           {
             word: "furniture",
@@ -1762,7 +1923,8 @@ const courseData = [
             ipa: "/ˈsoʊfə/",
             definition: "ghế sofa",
             example: "He is lying on the sofa.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
           },
           {
             word: "drawer",
@@ -1770,7 +1932,8 @@ const courseData = [
             ipa: "/drɔːr/",
             definition: "ngăn kéo",
             example: "The files are in the drawer.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
           },
           {
             word: "cabinet",
@@ -1778,7 +1941,8 @@ const courseData = [
             ipa: "/ˈkæbɪnət/",
             definition: "tủ",
             example: "The dishes are in the cabinet.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
           },
           {
             word: "light",
@@ -1794,7 +1958,8 @@ const courseData = [
             ipa: "/læmp/",
             definition: "đèn bàn",
             example: "A lamp is on the desk.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "clock",
@@ -1810,7 +1975,8 @@ const courseData = [
             ipa: "/ˈpɪktʃər/",
             definition: "bức tranh",
             example: "There is a picture on the wall.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "document",
@@ -1826,7 +1992,8 @@ const courseData = [
             ipa: "/ˈpeɪpər/",
             definition: "giấy; bài báo",
             example: "She printed the report on paper.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "display",
@@ -1834,7 +2001,8 @@ const courseData = [
             ipa: "/dɪˈspleɪ/",
             definition: "sự trưng bày",
             example: "The products are on display.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "display",
@@ -1842,7 +2010,8 @@ const courseData = [
             ipa: "/dɪˈspleɪ/",
             definition: "trưng bày",
             example: "The store displays new items.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "organized",
@@ -1882,7 +2051,8 @@ const courseData = [
             ipa: "/ˈbæskɪt/",
             definition: "giỏ",
             example: "She put fruit in a basket.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "box",
@@ -1906,7 +2076,8 @@ const courseData = [
             ipa: "/kənˈteɪnər/",
             definition: "thùng chứa",
             example: "Goods are shipped in large containers.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "suitcase",
@@ -1922,7 +2093,8 @@ const courseData = [
             ipa: "/bʊk/",
             definition: "sách",
             example: "A book is on the table.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1507842217343-583f20270319?w=400&h=300&fit=crop",
           },
           {
             word: "globe",
@@ -1930,7 +2102,8 @@ const courseData = [
             ipa: "/ɡloʊb/",
             definition: "quả địa cầu",
             example: "A globe is displayed in the classroom.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "guitar",
@@ -1938,7 +2111,8 @@ const courseData = [
             ipa: "/ɡɪˈtɑːr/",
             definition: "đàn guitar",
             example: "He is playing the guitar.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&h=300&fit=crop",
           },
           {
             word: "food",
@@ -1946,7 +2120,8 @@ const courseData = [
             ipa: "/fuːd/",
             definition: "thức ăn",
             example: "The food looks delicious.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "dish",
@@ -1954,7 +2129,8 @@ const courseData = [
             ipa: "/dɪʃ/",
             definition: "món ăn; cái đĩa",
             example: "She served a traditional dish.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
           },
           {
             word: "plant",
@@ -1962,7 +2138,8 @@ const courseData = [
             ipa: "/plænt/",
             definition: "cây",
             example: "There is a green plant in the office.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1416879295882-3373a0480b5b?w=400&h=300&fit=crop",
           },
           {
             word: "potted plant",
@@ -2536,7 +2713,8 @@ const courseData = [
             ipa: "/ˈtæk.si/",
             definition: "xe taxi",
             example: "We took a taxi from the airport to the hotel.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "bus",
@@ -2544,7 +2722,8 @@ const courseData = [
             ipa: "/bʌs/",
             definition: "xe buýt",
             example: "The last bus leaves at 10 p.m.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "subway / metro",
@@ -2552,7 +2731,8 @@ const courseData = [
             ipa: "/ˈsʌb.weɪ/ /ˈmet.rəʊ/",
             definition: "tàu điện ngầm",
             example: "I take the subway to work every morning.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "train",
@@ -2560,7 +2740,8 @@ const courseData = [
             ipa: "/treɪn/",
             definition: "tàu hỏa",
             example: "The train to Berlin leaves in 10 minutes.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
           },
           {
             word: "travel",
@@ -2568,7 +2749,8 @@ const courseData = [
             ipa: "/ˈtræv.əl/",
             definition: "đi du lịch",
             example: "I often travel abroad for work.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "travel",
@@ -2576,7 +2758,8 @@ const courseData = [
             ipa: "/ˈtræv.əl/",
             definition: "chuyến đi",
             example: "Travel is good for the soul.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "traveler",
@@ -2584,7 +2767,8 @@ const courseData = [
             ipa: "/ˈtræv.ə.lər/",
             definition: "du khách",
             example: "The traveler showed his passport at customs.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "traveling",
@@ -2592,7 +2776,8 @@ const courseData = [
             ipa: "/ˈtræv.əlɪŋ/",
             definition: "việc đi du lịch",
             example: "Traveling helps you learn about other cultures.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "traveling",
@@ -2600,7 +2785,8 @@ const courseData = [
             ipa: "/ˈtræv.əlɪŋ/",
             definition: "đi du lịch",
             example: "He has a traveling job.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop",
           },
           {
             word: "tourist",
@@ -2608,7 +2794,8 @@ const courseData = [
             ipa: "/ˈtʊə.rɪst/",
             definition: "khách du lịch",
             example: "Many tourists visit Ha Long Bay every year.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
           },
           {
             word: "tourism",
@@ -2632,7 +2819,8 @@ const courseData = [
             ipa: "/trɪp/",
             definition: "chuyến đi ngắn",
             example: "We took a weekend trip to the mountains.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
           },
           {
             word: "flight",
@@ -2640,7 +2828,8 @@ const courseData = [
             ipa: "/flaɪt/",
             definition: "chuyến bay",
             example: "Our flight to Tokyo departs at 7 p.m.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
           },
           {
             word: "airplane / aeroplane",
@@ -2648,7 +2837,8 @@ const courseData = [
             ipa: "/ˈeə.pleɪn/",
             definition: "máy bay",
             example: "The airplane is landing at the airport.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
           },
           {
             word: "airport",
@@ -2656,7 +2846,8 @@ const courseData = [
             ipa: "/ˈeə.pɔːt/",
             definition: "sân bay",
             example: "The airport was crowded this morning.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
           },
           {
             word: "terminal",
@@ -2672,7 +2863,8 @@ const courseData = [
             ipa: "/ɡeɪt/",
             definition: "cổng ra máy bay",
             example: "Please go to gate 15 for boarding.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
           },
           {
             word: "board",
@@ -2680,7 +2872,8 @@ const courseData = [
             ipa: "/bɔːd/",
             definition: "lên tàu / máy bay",
             example: "Passengers are now boarding the plane.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
           },
           {
             word: "boarding",
@@ -2688,7 +2881,8 @@ const courseData = [
             ipa: "/ˈbɔː.dɪŋ/",
             definition: "việc lên tàu / máy bay",
             example: "Boarding starts 45 minutes before departure.",
-            imageUrl: "",
+            imageUrl:
+              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
           },
           {
             word: "passport",
