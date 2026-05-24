@@ -10074,15 +10074,78 @@ function showDashboard() {
   document.getElementById("statsArea").style.display = "none";
   document.getElementById("progressContainer").style.display = "none";
 
-  // 1. Render Khóa Học Chuẩn (Hardcode)
-  let courseHtml = "";
+  // Tính toán thống kê chung
+  let totalLessons = 0;
+  let totalWords = 0;
+  let completedLessons = 0;
+
   courseData.forEach((course) => {
-    courseHtml += `<div style="margin-bottom: 25px;">
-      <div onclick="toggleCourse('${course.id}')" style="cursor: pointer; background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%); color: white; padding: 18px 22px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3); user-select: none; transition: all 0.3s ease;">
-        <h3 style="margin: 0; font-size: 19px; color: white; font-weight: 800;">${course.title}</h3>
-        <span id="icon_${course.id}" style="font-size: 20px; transition: transform 0.3s; display: inline-block;">▼</span>
+    course.lessons.forEach((lesson) => {
+      totalLessons++;
+      totalWords += lesson.words.length;
+      let lessonMistakesKey = "lesson_mistakes_" + course.id + "_" + lesson.id;
+      let savedMistakes = JSON.parse(
+        localStorage.getItem(lessonMistakesKey) || "[]",
+      );
+      if (savedMistakes.length === 0) completedLessons++;
+    });
+  });
+
+  // 1. Render Khóa Học Chuẩn (Hardcode)
+  let courseHtml = `
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; border-radius: 20px; margin-bottom: 35px; box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -50px; right: -50px; font-size: 150px; opacity: 0.1;">📚</div>
+      <div style="position: relative; z-index: 1;">
+        <h1 style="margin: 0 0 12px 0; color: white; font-size: 32px; font-weight: 900; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">🎓 Khóa Học Chuẩn Tiếng Anh</h1>
+        <p style="margin: 0; color: rgba(255,255,255,0.9); font-size: 15px; font-weight: 500;">Nâng cao kỹ năng với 18 bài học toàn diện</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">
+            <p style="margin: 0 0 6px 0; color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Bài học</p>
+            <p style="margin: 0; color: white; font-size: 28px; font-weight: 900;">${totalLessons}</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">
+            <p style="margin: 0 0 6px 0; color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Từ vựng</p>
+            <p style="margin: 0; color: white; font-size: 28px; font-weight: 900;">${totalWords}</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">
+            <p style="margin: 0 0 6px 0; color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Hoàn thành</p>
+            <p style="margin: 0; color: white; font-size: 28px; font-weight: 900;">${completedLessons}/${totalLessons}</p>
+          </div>
+        </div>
       </div>
-      <div id="lessons_${course.id}" style="display: none; flex-direction: column; gap: 12px; margin-top: 18px; padding: 20px; border-radius: 15px; background: linear-gradient(135deg, rgba(52, 152, 219, 0.08) 0%, rgba(41, 128, 185, 0.05) 100%); border: 2px solid rgba(52, 152, 219, 0.2);">`;
+    </div>
+  `;
+
+  courseData.forEach((course) => {
+    // Tính progress per course
+    let courseCompletedLessons = 0;
+    let courseTotalLessons = course.lessons.length;
+
+    course.lessons.forEach((lesson) => {
+      let lessonMistakesKey = "lesson_mistakes_" + course.id + "_" + lesson.id;
+      let savedMistakes = JSON.parse(
+        localStorage.getItem(lessonMistakesKey) || "[]",
+      );
+      if (savedMistakes.length === 0) courseCompletedLessons++;
+    });
+
+    let progressPercent = (courseCompletedLessons / courseTotalLessons) * 100;
+
+    courseHtml += `<div style="margin-bottom: 28px; background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); transition: all 0.3s ease;" onmouseenter="this.style.boxShadow='0 8px 28px rgba(0,0,0,0.12)'; this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'; this.style.transform='translateY(0)'">
+      <div onclick="toggleCourse('${course.id}')" style="cursor: pointer; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; user-select: none; transition: all 0.3s ease;">
+        <div style="flex: 1;">
+          <h3 style="margin: 0; font-size: 18px; color: white; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+            <span>${["📱", "🏪", "✈️", "🛍️", "🍽️", "🥘", "🍴", "⚕️", "📋", "💼", "🏨", "👔", "💻", "💼", "👥", "💰", "📦", "✅"][courseData.indexOf(course)]}</span>
+            ${course.title}
+          </h3>
+          <div style="margin-top: 10px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 3px; overflow: hidden;">
+            <div style="height: 100%; background: linear-gradient(90deg, #f39c12 0%, #27ae60 100%); width: ${progressPercent}%; transition: width 0.5s ease; border-radius: 3px;"></div>
+          </div>
+          <p style="margin: 6px 0 0 0; color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 600;">${courseCompletedLessons}/${courseTotalLessons} bài hoàn thành</p>
+        </div>
+        <span id="icon_${course.id}" style="font-size: 22px; transition: transform 0.3s; display: inline-block;">▼</span>
+      </div>
+      <div id="lessons_${course.id}" style="display: none; flex-direction: column; gap: 14px; padding: 24px; background: linear-gradient(135deg, #f8f9fa 0%, #f3f4f6 100%);">`;
 
     course.lessons.forEach((lesson) => {
       let wordCount = lesson.words.length;
@@ -10093,57 +10156,63 @@ function showDashboard() {
           : "linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%)";
       let cursor = wordCount > 0 ? "cursor: pointer;" : "cursor: not-allowed;";
 
-      // Check if there are saved mistakes for this lesson
       let lessonMistakesKey = "lesson_mistakes_" + course.id + "_" + lesson.id;
       let savedMistakes = JSON.parse(
         localStorage.getItem(lessonMistakesKey) || "[]",
       );
       let mistakesBtn =
         savedMistakes.length > 0
-          ? `<button class="main-btn" style="padding: 8px 14px; font-size: 12px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border: none; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3); font-weight: 700; white-space: nowrap; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(243, 156, 18, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(243, 156, 18, 0.3)';" onclick="playLessonMistakes('${course.id}', '${lesson.id}')">⚠️ Làm lại ${savedMistakes.length}</button>`
+          ? `<button class="main-btn" style="padding: 9px 16px; font-size: 12px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border: none; border-radius: 8px; box-shadow: 0 3px 10px rgba(243, 156, 18, 0.25); font-weight: 700; white-space: nowrap; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(243, 156, 18, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(243, 156, 18, 0.25)';" onclick="playLessonMistakes('${course.id}', '${lesson.id}')">⚠️ ${savedMistakes.length} lỗi</button>`
           : "";
 
       courseHtml += `
-        <div style="background: white; border: 2px solid ${btnColor}; padding: 16px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); ${wordCount > 0 ? "hover: box-shadow: 0 6px 16px rgba(52, 152, 219, 0.2);" : ""}">
+        <div style="background: white; border: 2px solid #e8ecf1; padding: 16px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.04); ${wordCount > 0 ? "" : "opacity: 0.7;"}" class="lesson-item">
           <div style="flex: 1;">
-            <p style="margin: 0; font-weight: 800; color: #2c3e50; font-size: 15px; line-height: 1.4;">${lesson.title}</p>
+            <p style="margin: 0; font-weight: 800; color: #2c3e50; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+              <span style="display: inline-block; width: 6px; height: 6px; background: #667eea; border-radius: 50%;"></span>
+              ${lesson.title}
+            </p>
+            <p style="margin: 4px 0 0 0; color: #95a5a6; font-size: 12px; font-weight: 600;">${wordCount} từ vựng</p>
           </div>
-          <div style="display: flex; gap: 8px; align-items: center;">
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
             ${mistakesBtn}
-            <button class="main-btn btn-primary" style="padding: 10px 18px; font-size: 14px; font-weight: 700; background: ${btnBg}; color: white; box-shadow: ${wordCount > 0 ? "0 4px 12px rgba(52, 152, 219, 0.3)" : "none"}; transition: all 0.3s ease; white-space: nowrap; ${cursor}" 
-              onmouseover="if(${wordCount} > 0) this.style.transform='translateY(-2px)'; if(${wordCount} > 0) this.style.boxShadow='0 6px 16px rgba(52, 152, 219, 0.4)';"
-              onmouseout="if(${wordCount} > 0) this.style.transform='translateY(0)'; if(${wordCount} > 0) this.style.boxShadow='0 4px 12px rgba(52, 152, 219, 0.3)';"
+            <button class="main-btn btn-primary" style="padding: 9px 16px; font-size: 13px; font-weight: 700; background: ${btnBg}; color: white; border-radius: 8px; box-shadow: ${wordCount > 0 ? "0 3px 10px rgba(52, 152, 219, 0.25)" : "none"}; transition: all 0.3s ease; white-space: nowrap; border: none; ${cursor}" 
+              onmouseover="if(${wordCount} > 0) {this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(52, 152, 219, 0.4)';}"
+              onmouseout="if(${wordCount} > 0) {this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(52, 152, 219, 0.25)';}"
               onclick="if(${wordCount} > 0) playCourseLesson('${course.id}', '${lesson.id}')">
-              ${wordCount > 0 ? `▶ Học (${wordCount} từ)` : `⏳ Sắp cập nhật`}
+              ${wordCount > 0 ? `▶ Học` : `⏳ Sắp cập nhật`}
             </button>
           </div>
         </div>
       `;
     });
-    courseHtml += `</div></div>`;
+    courseHtml += `</div></div></div>`;
   });
   let courseListEl = document.getElementById("courseList");
   if (courseListEl) courseListEl.innerHTML = courseHtml;
 
   // 2. Render Tủ Từ Của Tôi (LocalStorage)
   let html = "";
+  if (savedDecks.length > 0) {
+    html = `<h2 style="color: #2c3e50; font-size: 20px; font-weight: 800; margin: 35px 0 20px 0; display: flex; align-items: center; gap: 10px;"><span>📚</span> Bộ Từ Của Tôi</h2>`;
+  }
   savedDecks.forEach((deck) => {
     html += `
-            <div style="background: white; border: 2px solid var(--secondary); padding: 18px 20px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(155, 89, 182, 0.15); transition: all 0.3s ease;">
-              <div style="flex: 1;">
-                <h3 style="margin: 0 0 6px 0; color: var(--secondary-dark); font-size: 16px; font-weight: 800;">${deck.name || "Bộ từ chưa tên"}</h3>
-                <p style="margin: 0; color: #7f8c8d; font-size: 13px; font-weight: 600;">📊 ${deck.words.length} từ vựng</p>
-              </div>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;">
-                ${deck.mistakes && deck.mistakes.length > 0 ? `<button class="main-btn btn-spell" style="padding: 10px 14px; font-size: 13px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border: none; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3); font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(243, 156, 18, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(243, 156, 18, 0.3)';" onclick="playMistakesDeck('${deck.id}')">⚠️ Ôn ${deck.mistakes.length}</button>` : ""}
-                <button class="main-btn btn-quiz" style="padding: 10px 14px; font-size: 13px; background: linear-gradient(135deg, var(--secondary) 0%, #8e44ad 100%); color: white; border: none; box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3); font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(155, 89, 182, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(155, 89, 182, 0.3)';" onclick="playSelectedDeck('${deck.id}')">▶ Học</button>
-                <button class="main-btn" style="padding: 10px 14px; font-size: 13px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; border: none; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3); font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(231, 76, 60, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(231, 76, 60, 0.3)';" onclick="deleteDeck('${deck.id}')">🗑️</button>
-              </div>
-            </div>
-          `;
+      <div style="background: white; border: 2px solid var(--secondary); padding: 18px 20px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(155, 89, 182, 0.15); transition: all 0.3s ease; cursor: pointer;" onmouseenter="this.style.boxShadow='0 8px 20px rgba(155, 89, 182, 0.25)'; this.style.transform='translateY(-2px)'" onmouseleave="this.style.boxShadow='0 4px 12px rgba(155, 89, 182, 0.15)'; this.style.transform='translateY(0)'">
+        <div style="flex: 1;">
+          <h3 style="margin: 0 0 6px 0; color: var(--secondary-dark); font-size: 16px; font-weight: 800;">${deck.name || "Bộ từ chưa tên"}</h3>
+          <p style="margin: 0; color: #7f8c8d; font-size: 13px; font-weight: 600;">📊 ${deck.words.length} từ vựng</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;">
+          ${deck.mistakes && deck.mistakes.length > 0 ? `<button class="main-btn btn-spell" style="padding: 10px 14px; font-size: 13px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border: none; border-radius: 8px; box-shadow: 0 3px 10px rgba(243, 156, 18, 0.25); font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(243, 156, 18, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(243, 156, 18, 0.25)';" onclick="playMistakesDeck('${deck.id}')">⚠️ Ôn ${deck.mistakes.length}</button>` : ""}
+          <button class="main-btn btn-quiz" style="padding: 10px 14px; font-size: 13px; background: linear-gradient(135deg, var(--secondary) 0%, #8e44ad 100%); color: white; border: none; border-radius: 8px; box-shadow: 0 3px 10px rgba(155, 89, 182, 0.25); font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(155, 89, 182, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(155, 89, 182, 0.25)';" onclick="playSelectedDeck('${deck.id}')">▶ Học</button>
+          <button class="main-btn" style="padding: 10px 14px; font-size: 13px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; border: none; border-radius: 8px; box-shadow: 0 3px 10px rgba(231, 76, 60, 0.25); font-weight: 700; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(231, 76, 60, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(231, 76, 60, 0.25)';" onclick="deleteDeck('${deck.id}')">🗑️</button>
+        </div>
+      </div>
+    `;
   });
   if (savedDecks.length === 0)
-    html = `<p style="text-align:center; color:#7f8c8d;">Bạn chưa có bộ từ vựng nào.</p>`;
+    html = `<p style="text-align:center; color:#7f8c8d; margin-top: 30px; font-size: 14px;">Bạn chưa có bộ từ vựng nào.</p>`;
   document.getElementById("deckList").innerHTML = html;
 }
 
@@ -11029,7 +11098,15 @@ window.scrollToUnanswered = () => {
   }
 };
 
+window.removeFixedButtonBar = () => {
+  const fixedBar = document.getElementById("fixedButtonBar");
+  if (fixedBar) fixedBar.remove();
+  const quizArea = document.getElementById("quizArea");
+  quizArea.style.paddingBottom = "0";
+};
+
 window.goBackToDashboard = () => {
+  window.removeFixedButtonBar();
   document.getElementById("previewSection").style.display = "none";
   document.getElementById("quizArea").innerHTML = "";
   document.getElementById("statsArea").style.display = "none";
@@ -11058,6 +11135,33 @@ function startApp(mode) {
 
   progressBar.style.width = "0%";
   progressContainer.style.display = mode !== "flashcard" ? "block" : "none";
+
+  // Tạo fixed button bar ở bottom cho quiz & spell mode
+  if (mode !== "flashcard") {
+    window.removeFixedButtonBar(); // Xóa bar cũ nếu có
+    let fixedBar = document.createElement("div");
+    fixedBar.id = "fixedButtonBar";
+    fixedBar.style = `
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid rgba(52, 152, 219, 0.3);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+      z-index: 1000;
+    `;
+    fixedBar.innerHTML = `
+      <button style="padding: 8px 16px; background: #4a5568; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.12);" onmouseover="this.style.background='#2d3748'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.background='#4a5568'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 6px rgba(0,0,0,0.12)'" onclick="scrollToUnanswered()">🔍 Tìm câu</button>
+      <button style="padding: 8px 16px; background: var(--primary); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3);" onmouseover="this.style.background='#2980b9'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(52, 152, 219, 0.4)'" onmouseout="this.style.background='var(--primary)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 6px rgba(52, 152, 219, 0.3)'" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ Top</button>
+    `;
+    document.body.appendChild(fixedBar);
+    quizArea.style.paddingBottom = "60px";
+  }
 
   quizArea.innerHTML = `
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom: 15px;">
@@ -11247,15 +11351,7 @@ function startApp(mode) {
       });
     }
 
-    // Thêm cụm nút Điều hướng cuối trang
-    let bottomControls = document.createElement("div");
-    bottomControls.style =
-      "display: flex; gap: 15px; margin-top: 30px; margin-bottom: 40px;";
-    bottomControls.innerHTML = `
-            <button class="main-btn" style="background:#4a5568; box-shadow: 0 4px 0 #2d3748; font-size:14px; flex: 1;" onclick="scrollToUnanswered()">🔍 Tìm câu chưa làm</button>
-            <button class="main-btn btn-primary" style="font-size:14px; flex: 1;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ Lên đầu trang</button>
-          `;
-    quizArea.appendChild(bottomControls);
+    // Nút Điều hướng đã di chuyển vào fixed bar ở bottom
   }
 }
 
@@ -11453,6 +11549,7 @@ window.nextCard = () => {
 };
 
 function showStatistics(mode) {
+  window.removeFixedButtonBar(); // Xóa fixed button bar
   // --- LƯU LẠI TỪ SAI VÀO LOCALSTORAGE ---
   if (currentDeckId && mode !== "flashcard") {
     // Nếu là course lesson, lưu mistakes cho lesson đó
