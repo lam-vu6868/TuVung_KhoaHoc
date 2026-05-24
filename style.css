@@ -692,7 +692,7 @@ body.dark-mode .confirm-modal {
 }
 @media (min-width: 600px) {
   .dashboard-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 .dashboard-col {

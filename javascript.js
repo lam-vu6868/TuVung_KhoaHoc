@@ -10093,17 +10093,30 @@ function showDashboard() {
           : "linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%)";
       let cursor = wordCount > 0 ? "cursor: pointer;" : "cursor: not-allowed;";
 
+      // Check if there are saved mistakes for this lesson
+      let lessonMistakesKey = "lesson_mistakes_" + course.id + "_" + lesson.id;
+      let savedMistakes = JSON.parse(
+        localStorage.getItem(lessonMistakesKey) || "[]",
+      );
+      let mistakesBtn =
+        savedMistakes.length > 0
+          ? `<button class="main-btn" style="padding: 8px 14px; font-size: 12px; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border: none; box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3); font-weight: 700; white-space: nowrap; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(243, 156, 18, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(243, 156, 18, 0.3)';" onclick="playLessonMistakes('${course.id}', '${lesson.id}')">⚠️ Làm lại ${savedMistakes.length}</button>`
+          : "";
+
       courseHtml += `
         <div style="background: white; border: 2px solid ${btnColor}; padding: 16px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); ${wordCount > 0 ? "hover: box-shadow: 0 6px 16px rgba(52, 152, 219, 0.2);" : ""}">
           <div style="flex: 1;">
             <p style="margin: 0; font-weight: 800; color: #2c3e50; font-size: 15px; line-height: 1.4;">${lesson.title}</p>
           </div>
-          <button class="main-btn btn-primary" style="padding: 10px 18px; font-size: 14px; font-weight: 700; background: ${btnBg}; color: white; box-shadow: ${wordCount > 0 ? "0 4px 12px rgba(52, 152, 219, 0.3)" : "none"}; transition: all 0.3s ease; margin-left: 15px; white-space: nowrap; ${cursor}" 
-            onmouseover="if(${wordCount} > 0) this.style.transform='translateY(-2px)'; if(${wordCount} > 0) this.style.boxShadow='0 6px 16px rgba(52, 152, 219, 0.4)';"
-            onmouseout="if(${wordCount} > 0) this.style.transform='translateY(0)'; if(${wordCount} > 0) this.style.boxShadow='0 4px 12px rgba(52, 152, 219, 0.3)';"
-            onclick="if(${wordCount} > 0) playCourseLesson('${course.id}', '${lesson.id}')">
-            ${wordCount > 0 ? `▶ Học (${wordCount} từ)` : `⏳ Sắp cập nhật`}
-          </button>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            ${mistakesBtn}
+            <button class="main-btn btn-primary" style="padding: 10px 18px; font-size: 14px; font-weight: 700; background: ${btnBg}; color: white; box-shadow: ${wordCount > 0 ? "0 4px 12px rgba(52, 152, 219, 0.3)" : "none"}; transition: all 0.3s ease; white-space: nowrap; ${cursor}" 
+              onmouseover="if(${wordCount} > 0) this.style.transform='translateY(-2px)'; if(${wordCount} > 0) this.style.boxShadow='0 6px 16px rgba(52, 152, 219, 0.4)';"
+              onmouseout="if(${wordCount} > 0) this.style.transform='translateY(0)'; if(${wordCount} > 0) this.style.boxShadow='0 4px 12px rgba(52, 152, 219, 0.3)';"
+              onclick="if(${wordCount} > 0) playCourseLesson('${course.id}', '${lesson.id}')">
+              ${wordCount > 0 ? `▶ Học (${wordCount} từ)` : `⏳ Sắp cập nhật`}
+            </button>
+          </div>
         </div>
       `;
     });
@@ -10174,6 +10187,27 @@ function playCourseLesson(courseId, lessonId) {
         `${course.title} - ${lesson.title}`;
       // Clone dữ liệu cứng ra để không đụng chạm tới JSON gốc
       preparedData = JSON.parse(JSON.stringify(lesson.words));
+      renderPreviewHtml();
+    }
+  }
+}
+
+function playLessonMistakes(courseId, lessonId) {
+  let course = courseData.find((c) => c.id === courseId);
+  if (course) {
+    let lesson = course.lessons.find((l) => l.id === lessonId);
+    let lessonMistakesKey = "lesson_mistakes_" + courseId + "_" + lessonId;
+    let savedMistakes = JSON.parse(
+      localStorage.getItem(lessonMistakesKey) || "[]",
+    );
+    if (savedMistakes.length > 0 && lesson) {
+      currentDeckId = "course_" + courseId + "_" + lessonId + "_mistakes";
+      document.getElementById("deckName").value =
+        `${course.title} - ${lesson.title} (Làm lại câu sai - ${savedMistakes.length} từ)`;
+      // Lấy chỉ các từ sai từ lesson
+      preparedData = JSON.parse(JSON.stringify(lesson.words)).filter((w) =>
+        savedMistakes.includes(w.word),
+      );
       renderPreviewHtml();
     }
   }
@@ -11156,12 +11190,25 @@ function startApp(mode) {
           answeredQuestions++;
           explanationDiv.style.display = "block";
 
-          if (userWord === item.word.toLowerCase()) {
+          // Normalize spaces around "/" for correct matching: "tooth / teeth" -> "tooth/teeth"
+          let normalizedUserWord = userWord.replace(/\s*\/\s*/g, "/");
+          let normalizedExpectedWord = item.word
+            .toLowerCase()
+            .replace(/\s*\/\s*/g, "/");
+
+          if (normalizedUserWord === normalizedExpectedWord) {
             playSFX("correct");
             correctAnswers++;
             inputField.style.borderColor = "var(--success)";
             inputField.style.background = "#eafaf1";
-            explanationDiv.innerHTML = `🎉 <b>Xuất sắc!</b> Đúng chuẩn chính tả.`;
+            explanationDiv.innerHTML = `🎉 <b>Xuất sắc!</b> Đúng chuẩn chính tả.
+              <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1);">
+                <p style="margin: 8px 0; font-size: 13px; color: #555;"><b>IPA:</b> ${item.ipa || "N/A"}</p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button style="padding: 6px 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'" onclick="speakWord('${item.word}', 'en-US')">🔊 A-A (US)</button>
+                  <button style="padding: 6px 12px; background: #2980b9; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#1f618d'" onmouseout="this.style.background='#2980b9'" onclick="speakWord('${item.word}', 'en-GB')">🔊 A-M (UK)</button>
+                </div>
+              </div>`;
             explanationDiv.style.background = "#eafaf1";
             explanationDiv.style.color = "var(--success-dark)";
           } else {
@@ -11176,7 +11223,14 @@ function startApp(mode) {
               correct: item.word,
               userAnswer: userWord,
             });
-            explanationDiv.innerHTML = `❌ <b>Sai mất rồi!</b> Đáp án đúng: <b style="font-size:18px;">${item.word}</b>`;
+            explanationDiv.innerHTML = `❌ <b>Sai mặt rồi!</b> Đáp án đúng: <b style="font-size:18px;">${item.word}</b>
+              <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1);">
+                <p style="margin: 8px 0; font-size: 13px; color: #555;"><b>IPA:</b> ${item.ipa || "N/A"}</p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button style="padding: 6px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#c0392b'" onmouseout="this.style.background='#e74c3c'" onclick="speakWord('${item.word}', 'en-US')">🔊 A-A (US)</button>
+                  <button style="padding: 6px 12px; background: #e67e22; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#d35400'" onmouseout="this.style.background='#e67e22'" onclick="speakWord('${item.word}', 'en-GB')">🔊 A-M (UK)</button>
+                </div>
+              </div>`;
             explanationDiv.style.background = "#fdedec";
             explanationDiv.style.color = "var(--danger-dark)";
           }
@@ -11397,28 +11451,51 @@ window.nextCard = () => {
 };
 
 function showStatistics(mode) {
-  // --- LƯU LẠI TỪ SAI VÀO LOCALSTORAGE CHO BỘ TỪ HIỆN TẠI ---
-  // Chỉ lưu cho bộ từ tự tạo, không lưu cho course lessons
-  if (
-    currentDeckId &&
-    mode !== "flashcard" &&
-    !currentDeckId.startsWith("course_")
-  ) {
-    let deckIndex = savedDecks.findIndex((d) => d.id === currentDeckId);
-    if (deckIndex >= 0) {
-      let deckMistakes = new Set(savedDecks[deckIndex].mistakes || []);
-      // Quét qua những từ vừa ôn (preparedData)
-      preparedData.forEach((item) => {
-        // Tìm xem từ này lúc nãy làm có bị sai không
-        let missedThisTime = mistakes.find((m) => m.word === item.word);
-        if (missedThisTime) {
-          deckMistakes.add(item.word); // Làm sai -> Chui vào sổ đen
-        } else {
-          deckMistakes.delete(item.word); // Làm đúng -> Thoát khỏi sổ đen
-        }
-      });
-      savedDecks[deckIndex].mistakes = Array.from(deckMistakes);
-      localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+  // --- LƯU LẠI TỪ SAI VÀO LOCALSTORAGE ---
+  if (currentDeckId && mode !== "flashcard") {
+    // Nếu là course lesson, lưu mistakes cho lesson đó
+    if (currentDeckId.startsWith("course_")) {
+      let parts = currentDeckId.split("_");
+      if (parts.length >= 3) {
+        let courseId = parts[1];
+        let lessonId = parts[2];
+        let lessonMistakesKey = "lesson_mistakes_" + courseId + "_" + lessonId;
+        let savedMistakes = JSON.parse(
+          localStorage.getItem(lessonMistakesKey) || "[]",
+        );
+
+        // Update mistakes set
+        let mistakesSet = new Set(savedMistakes);
+        preparedData.forEach((item) => {
+          let missedThisTime = mistakes.find((m) => m.word === item.word);
+          if (missedThisTime) {
+            mistakesSet.add(item.word); // Làm sai -> Thêm vào
+          } else {
+            mistakesSet.delete(item.word); // Làm đúng -> Xóa khỏi
+          }
+        });
+        localStorage.setItem(
+          lessonMistakesKey,
+          JSON.stringify(Array.from(mistakesSet)),
+        );
+      }
+    }
+    // Nếu là bộ từ tự tạo, lưu vào savedDecks
+    else if (!currentDeckId.startsWith("course_")) {
+      let deckIndex = savedDecks.findIndex((d) => d.id === currentDeckId);
+      if (deckIndex >= 0) {
+        let deckMistakes = new Set(savedDecks[deckIndex].mistakes || []);
+        preparedData.forEach((item) => {
+          let missedThisTime = mistakes.find((m) => m.word === item.word);
+          if (missedThisTime) {
+            deckMistakes.add(item.word);
+          } else {
+            deckMistakes.delete(item.word);
+          }
+        });
+        savedDecks[deckIndex].mistakes = Array.from(deckMistakes);
+        localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+      }
     }
   }
   // --------------------------------------------------------
