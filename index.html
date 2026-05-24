@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💡 Ôn Từ Vựng Đa Năng - Bản Sửa Lỗi Hoàn Chỉnh</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Container chứa thông báo (Toast) -->
+    <div id="toastContainer"></div>
+
+    <!-- Dialog Xác Nhận (Confirm) -->
+    <div id="confirmOverlay" class="confirm-overlay">
+      <div class="confirm-modal">
+        <h3>Xác nhận</h3>
+        <p id="confirmMessage">Bạn có chắc chắn?</p>
+        <div class="confirm-buttons">
+          <button id="btnConfirmCancel" class="main-btn btn-cancel">Hủy</button>
+          <button
+            id="btnConfirmOk"
+            class="main-btn"
+            style="
+              background: var(--danger);
+              box-shadow: 0 4px 0 var(--danger-dark);
+            "
+          >
+            Đồng ý
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nút gạt Dark Mode -->
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" onchange="toggleTheme(this)" />
+        <div class="slider"></div>
+      </label>
+    </div>
+
+    <!-- Giao diện Quản lý bộ từ (2 Cột) -->
+    <div
+      id="dashboardSection"
+      style="display: none; animation: slideInUp 0.4s ease-out"
+    >
+      <div class="dashboard-grid">
+        <!-- CỘT 1: KHÓA HỌC CHUẨN -->
+        <div class="dashboard-col course-col">
+          <h2 style="margin-top: 0; color: var(--primary-dark)">
+            🎓 Khóa Học Chuẩn
+          </h2>
+          <p class="subtitle" style="margin-bottom: 20px; font-size: 14px">
+            Giáo trình tiếng Anh gồm các bài học trọn bộ
+          </p>
+          <div id="courseList"></div>
+        </div>
+
+        <!-- CỘT 2: TỦ TỪ CỦA TÔI -->
+        <div class="dashboard-col deck-col">
+          <h2 style="margin-top: 0; color: var(--secondary-dark)">
+            📚 Tủ Từ Của Tôi
+          </h2>
+          <p class="subtitle" style="margin-bottom: 20px; font-size: 14px">
+            Quản lý các bộ từ vựng bạn tự tạo và lưu trên máy
+          </p>
+          <div id="deckList"></div>
+          <button
+            class="main-btn btn-primary"
+            onclick="showInputSection()"
+            style="
+              width: 100%;
+              margin-top: 15px;
+              background: var(--secondary);
+              box-shadow: 0 4px 0 var(--secondary-dark);
+            "
+          >
+            ➕ Tạo Bộ Từ Mới
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="inputSection" style="display: none">
+      <h2>✨ Tạo Bộ Từ Vựng Mới</h2>
+      <p class="subtitle" style="margin-bottom: 15px">
+        Nhập tên và dán danh sách từ vựng vào đây nhé!
+      </p>
+      <input
+        type="text"
+        id="deckName"
+        class="preview-input"
+        placeholder="Tên bộ từ (VD: Unit 1 - Động vật)"
+        style="
+          width: 100%;
+          margin-bottom: 15px;
+          box-sizing: border-box;
+          font-size: 16px;
+        "
+      />
+      <textarea
+        id="wordInput"
+        placeholder="Nhập từ vựng ở đây nhé...&#10;Ví dụ:&#10;apple&#10;beautiful&#10;run"
+      ></textarea>
+      <div class="btn-group">
+        <button
+          class="main-btn btn-primary"
+          id="btnLoad"
+          onclick="loadAndPreviewWords()"
+        >
+          🚀 Tiếp tục (Chuẩn bị từ vựng)
+        </button>
+      </div>
+    </div>
+
+    <div id="loading">Đang phân tích và dịch nghĩa từ vựng... 🚀</div>
+
+    <div id="previewSection" style="display: none"></div>
+
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div id="quizArea"></div>
+    <div id="statsArea" class="stats-card"></div>
+  </body>
+  <script src="./javascript.js"></script>
+</html>
