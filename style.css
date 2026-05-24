@@ -461,105 +461,6 @@ textarea:focus {
   }
 }
 
-/* 🌙 1. Dark Theme Variables & Styles */
-body.dark-mode {
-  --bg-color: #1a202c;
-  --text-color: #e2e8f0;
-  background: #1a202c;
-}
-body.dark-mode .question-card,
-body.dark-mode .preview-container,
-body.dark-mode .stats-card,
-body.dark-mode textarea,
-body.dark-mode .spell-input,
-body.dark-mode .preview-input {
-  background-color: #2d3748;
-  border-color: #4a5568;
-  color: #e2e8f0;
-}
-body.dark-mode div[style*="background: white"] {
-  background-color: #2d3748 !important;
-  border-color: #4a5568 !important;
-}
-body.dark-mode .option {
-  background: #2d3748;
-  border-color: #4a5568;
-  color: #e2e8f0;
-}
-body.dark-mode .option:hover:not(.disabled) {
-  background: #4a5568;
-}
-body.dark-mode .flip-card-front {
-  background-color: #2d3748;
-  color: #e2e8f0;
-}
-body.dark-mode .speaker-btn {
-  background: #2d3748;
-  color: #e2e8f0;
-  border-color: #4a5568;
-}
-body.dark-mode .speaker-btn:hover {
-  background: #4a5568;
-}
-body.dark-mode .progress-container {
-  background: rgba(26, 32, 44, 0.9);
-}
-body.dark-mode p.subtitle {
-  color: #a0aec0;
-}
-
-/* ✨ Toggle Switch CSS */
-.theme-switch-wrapper {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-}
-.theme-switch {
-  display: inline-block;
-  height: 30px;
-  position: relative;
-  width: 54px;
-}
-.theme-switch input {
-  display: none;
-}
-.slider {
-  background-color: #cbd5e0;
-  bottom: 0;
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-.slider:before {
-  background-color: white;
-  bottom: 3px;
-  content: "☀️";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  height: 24px;
-  left: 4px;
-  position: absolute;
-  transition: 0.4s;
-  width: 24px;
-  border-radius: 50%;
-}
-input:checked + .slider {
-  background-color: var(--primary-dark);
-}
-input:checked + .slider:before {
-  transform: translateX(22px);
-  content: "🌙";
-}
-
 /* ✨ Custom Toast Notification CSS */
 #toastContainer {
   position: fixed;
@@ -652,9 +553,6 @@ input:checked + .slider:before {
   transform: scale(0.8);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-}
-body.dark-mode .confirm-modal {
-  background: #2d3748;
 }
 .confirm-overlay.show .confirm-modal {
   transform: scale(1);

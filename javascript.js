@@ -35,22 +35,7 @@ function showConfirm(message, onConfirm) {
   };
 }
 
-// 🌙 Xử lý Theme (Dark Mode)
-function toggleTheme(e) {
-  if (e.checked) {
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark");
-  } else {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("theme", "light");
-  }
-}
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  document.getElementById("checkbox").checked = true;
-}
-
-// 🎵 Web Audio API cho Sound Effects (SFX)
+//  Web Audio API cho Sound Effects (SFX)
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 function playSFX(type) {
   if (audioCtx.state === "suspended") audioCtx.resume();
