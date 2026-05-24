@@ -10735,16 +10735,29 @@ const dummyDistractors = [
 function speakWord(word, accent) {
   if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  let utterance = new SpeechSynthesisUtterance(word);
+
+  // Tách các từ bằng dấu "/" (ví dụ: "child / children" -> ["child", "children"])
+  let words = word
+    .split("/")
+    .map((w) => w.trim())
+    .filter((w) => w.length > 0);
+
   let voices = window.speechSynthesis.getVoices();
   let targetVoice = voices.find((v) =>
     accent === "en-GB" || accent === "uk"
       ? v.lang === "en-GB" || v.lang === "en_GB"
       : v.lang === "en-US" || v.lang === "en_US",
   );
-  if (targetVoice) utterance.voice = targetVoice;
-  utterance.rate = 0.9;
-  window.speechSynthesis.speak(utterance);
+
+  // Đọc từng từ liên tiếp với delay
+  words.forEach((w, index) => {
+    setTimeout(() => {
+      let utterance = new SpeechSynthesisUtterance(w);
+      if (targetVoice) utterance.voice = targetVoice;
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }, index * 800); // Delay 800ms giữa các từ
+  });
 }
 
 // 💡 Hàm đoán từ loại từ nghĩa tiếng Việt
@@ -10992,8 +11005,7 @@ function renderPreviewHtml() {
             <button class="main-btn btn-quiz" onclick="startApp('quiz')">📝 Trắc Nghiệm</button>
             <button class="main-btn btn-spell" onclick="startApp('spell')">⌨️ Gõ Từ</button>
           </div>
-          <button class="speaker-btn" style="width:100%; margin-top:15px; justify-content:center; color:var(--primary);" onclick="goBackToInput()">✍️ Quay lại nhập thêm từ</button>
-          <button class="speaker-btn" style="width:100%; margin-top:10px; justify-content:center; color:var(--danger);" onclick="goBackToDashboard()">🏠 Về Tủ Từ Vựng</button>
+          <button class="main-btn" style="width:100%; margin-top:15px; background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%); box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); font-weight: 700;" onclick="goBackToDashboard()">🎓 Quay lại Khóa Học Chuẩn</button>
         `;
   previewSection.innerHTML = previewHtml;
 }
@@ -11027,16 +11039,6 @@ window.goBackToDashboard = () => {
   } else {
     showInputSection();
   }
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-window.goBackToInput = () => {
-  document.getElementById("inputSection").style.display = "block";
-  document.getElementById("previewSection").style.display = "none";
-  document.getElementById("quizArea").innerHTML = "";
-  document.getElementById("statsArea").style.display = "none";
-  document.getElementById("progressContainer").style.display = "none";
-  document.getElementById("dashboardSection").style.display = "none";
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
