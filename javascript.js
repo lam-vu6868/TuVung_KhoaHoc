@@ -11005,7 +11005,7 @@ function renderPreviewHtml() {
             <button class="main-btn btn-quiz" onclick="startApp('quiz')">📝 Trắc Nghiệm</button>
             <button class="main-btn btn-spell" onclick="startApp('spell')">⌨️ Gõ Từ</button>
           </div>
-          <button class="main-btn" style="width:100%; margin-top:15px; background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%); box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); font-weight: 700;" onclick="goBackToDashboard()">🎓 Quay lại Khóa Học Chuẩn</button>
+          <button class="main-btn" style="width:100%; margin-top:15px; background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%); box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); font-weight: 700;" onclick="goBackToDashboard()">🎓 Quay lại</button>
         `;
   previewSection.innerHTML = previewHtml;
 }
