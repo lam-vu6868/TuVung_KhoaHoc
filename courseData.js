@@ -851,7 +851,8 @@ const courseData = [
             ipa: "/riːd/",
             definition: "đọc",
             example: "She reads the newspaper daily.",
-            imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGBz9t49dfUOnRb25ceE7FwW7Ye78eZVOfdw&s",
+            imageUrl:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGBz9t49dfUOnRb25ceE7FwW7Ye78eZVOfdw&s",
           },
           {
             word: "talk",
@@ -859,7 +860,8 @@ const courseData = [
             ipa: "/tɔːk/",
             definition: "nói chuyện",
             example: "They talked about the project.",
-            imageUrl: "",
+            imageUrl:
+              "https://assets.newsweek.com/wp-content/uploads/2025/08/2283019-per-small-talk-think-fast-01-banner.jpg",
           },
           {
             word: "talk",
@@ -867,7 +869,8 @@ const courseData = [
             ipa: "/tɔːk/",
             definition: "cuộc nói chuyện",
             example: "We had a long talk.",
-            imageUrl: "",
+            imageUrl:
+              "https://assets.newsweek.com/wp-content/uploads/2025/08/2283019-per-small-talk-think-fast-01-banner.jpg",
           },
           {
             word: "walk",
@@ -875,7 +878,8 @@ const courseData = [
             ipa: "/wɔːk/",
             definition: "đi bộ",
             example: "She walks to work.",
-            imageUrl: "",
+            imageUrl:
+              "https://assets.newsweek.com/wp-content/uploads/2025/08/2283019-per-small-talk-think-fast-01-banner.jpg",
           },
           {
             word: "walk",
@@ -883,7 +887,8 @@ const courseData = [
             ipa: "/wɔːk/",
             definition: "cuộc đi bộ",
             example: "He went for a walk.",
-            imageUrl: "",
+            imageUrl:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiJq08jvzoLZvVV6fr1xQzydEzNutKTztjVw&s",
           },
           {
             word: "produce",
