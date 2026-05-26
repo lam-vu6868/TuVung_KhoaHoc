@@ -789,7 +789,7 @@ const courseData = [
             definition: "kiểm tra, xem xét",
             example: "The doctor will examine the patient.",
             imageUrl:
-              "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
+              "https://previews.123rf.com/images/stuartphoto/stuartphoto1402/stuartphoto140201516/26065495-examine-character-showing-examination-examining-and-scrutiny.jpg",
           },
           {
             word: "handle",
