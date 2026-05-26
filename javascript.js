@@ -977,7 +977,7 @@ function renderFlashcard() {
   let defaultBg =
     "linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%)";
   let cardBackStyle = item.imageUrl
-    ? `background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('${item.imageUrl}') center/cover; background-attachment: fixed; position: relative;`
+    ? `background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('${item.imageUrl}') center/contain no-repeat; background-attachment: fixed; position: relative; image-rendering: crisp-edges; -webkit-font-smoothing: antialiased;`
     : `background: ${defaultBg}; position: relative;`;
 
   quizArea.innerHTML = `
