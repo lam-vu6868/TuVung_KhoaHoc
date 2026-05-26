@@ -10238,6 +10238,15 @@ savedDecks = savedDecks.filter((d) => !d.id.startsWith("course_"));
 localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Check Web Speech API availability
+  if (!window.speechSynthesis) {
+    console.warn("⚠️ Web Speech API NOT available on this browser!");
+  } else {
+    console.log("✅ Web Speech API available");
+    let voices = window.speechSynthesis.getVoices();
+    console.log("Voices at load:", voices.length);
+  }
+
   if (savedDecks.length > 0 || courseData.length > 0) {
     showDashboard();
   } else {
@@ -10752,7 +10761,10 @@ function renderPreviewHtml() {
   let previewHtml = `
           <h3>🔍 Xem trước & Chỉnh sửa nghĩa</h3>
           <p style="color:#7f8c8d; font-size:14px; margin-bottom:15px;">Chỉnh sửa nghĩa tiếng Việt (nếu cần) trước khi bắt đầu học nhé!</p>
-          <button class="main-btn" style="width:100%; margin-bottom:15px; background: linear-gradient(135deg, #27ae60 0%, #229954 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="openListenFromPreview()">🎧 Nghe từng từ</button>
+          <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <button class="main-btn" style="flex: 1; background: linear-gradient(135deg, #27ae60 0%, #229954 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="window.startListeningNow(); display: none">🎧 Nghe từng từ</button>
+            <button class="main-btn" style="flex: 0 0 auto; background: #3498db; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); font-weight: 700;" onclick="window.openListenSettings()">⚙️ Cài đặt</button>
+          </div>
           <div class="preview-list" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px; padding-right:5px;">
         `;
 
@@ -10830,7 +10842,7 @@ window.goBackToDashboard = () => {
   document.getElementById("quizArea").innerHTML = "";
   document.getElementById("statsArea").style.display = "none";
   document.getElementById("progressContainer").style.display = "none";
-  if (savedDecks.length > 0) {
+  if (savedDecks.length > 0 || courseData.length > 0) {
     showDashboard();
   } else {
     showInputSection();
@@ -11372,205 +11384,337 @@ window.redoMistakes = (mode) => {
 };
 
 // -------------------------------------------------------------
-// TEXT-TO-SPEECH (NGHE TỪ VỰNG TỰ ĐỘNG)
-// -------------------------------------------------------------
-let currentListenWords = [];
-let listenState = {
-  active: false,
-  startIndex: 0,
-  endIndex: 0,
-  loops: 1,
-  currentLoop: 1,
-  currentIndex: 0,
-};
+// ============================================================================
+// NGHE TỪ VỰNG - ĐƠNGIẢN & TRỰC TIẾP (copy từ speakWord logic)
+// ============================================================================
 
-// Expose to window object for global access
-window.currentListenWords = currentListenWords;
-window.listenState = listenState;
+let isListening = false;
+let listenTimeoutIds = [];
 
-window.speechSynthesis.onvoiceschanged = function () {
-  window.speechSynthesis.getVoices();
-};
+// Hàm convert số thành tiếng Anh
+const numberToEnglish = (num) => {
+  const ones = [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+  ];
+  const teens = [
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+  ];
+  const tens = [
+    "",
+    "",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety",
+  ];
 
-function openListenModal(courseId, lessonId) {
-  let course = courseData.find((c) => c.id === courseId);
-  if (!course) return;
-  let lesson = course.lessons.find((l) => l.id === lessonId);
-  if (!lesson) return;
-
-  currentListenWords = lesson.words;
-  window.currentListenWords = lesson.words; // Update window object
-
-  document.getElementById("listenStart").value = 1;
-  document.getElementById("listenEnd").value = Math.min(
-    10,
-    currentListenWords.length,
-  );
-  document.getElementById("listenEnd").max = currentListenWords.length;
-  document.getElementById("listenRepetitions").value = 2;
-
-  document.getElementById("listenStatus").style.display = "none";
-  document.getElementById("btnListenStart").style.display = "inline-block";
-  document.getElementById("btnListenStop").style.display = "none";
-
-  document.getElementById("listenOverlay").style.display = "flex";
-}
-
-window.openListenModal = openListenModal;
-
-function openListenFromPreview() {
-  // Use preparedData (currently being edited/previewed) instead of courseData
-  currentListenWords = preparedData;
-  window.currentListenWords = preparedData; // Update window object
-
-  document.getElementById("listenStart").value = 1;
-  document.getElementById("listenEnd").value = Math.min(
-    10,
-    currentListenWords.length,
-  );
-  document.getElementById("listenEnd").max = currentListenWords.length;
-  document.getElementById("listenRepetitions").value = 2;
-
-  document.getElementById("listenStatus").style.display = "none";
-  document.getElementById("btnListenStart").style.display = "inline-block";
-  document.getElementById("btnListenStop").style.display = "none";
-
-  document.getElementById("listenOverlay").style.display = "flex";
-}
-
-window.openListenFromPreview = openListenFromPreview;
-
-function closeListenModal() {
-  document.getElementById("listenOverlay").style.display = "none";
-  stopListening();
-}
-window.closeListenModal = closeListenModal;
-
-function getVoice(langCode) {
-  let voices = window.speechSynthesis.getVoices();
-  for (let i = 0; i < voices.length; i++) {
-    if (voices[i].lang.indexOf(langCode) === 0) return voices[i];
+  if (num === 0) return "zero";
+  if (num < 10) return ones[num];
+  if (num < 20) return teens[num - 10];
+  if (num < 100)
+    return (
+      tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + ones[num % 10] : "")
+    );
+  if (num < 1000) {
+    return (
+      ones[Math.floor(num / 100)] +
+      " hundred" +
+      (num % 100 !== 0 ? " " + numberToEnglish(num % 100) : "")
+    );
   }
-  return null;
-}
+  return num.toString();
+};
 
-function speakText(text, lang) {
-  return new Promise((resolve) => {
-    if (!listenState.active) return resolve();
-    let utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = 0.9;
-    let voice = getVoice(lang === "en-US" ? "en-US" : "vi-VN");
-    if (voice) utterance.voice = voice;
-
-    // Ngắt nhịp 0.6s sau khi đọc xong
-    utterance.onend = () => setTimeout(resolve, 600);
-    utterance.onerror = () => resolve();
-    window.speechSynthesis.speak(utterance);
-  });
-}
-
-function speakTextFast(text, lang) {
-  return new Promise((resolve) => {
-    if (!listenState.active) return resolve();
-    let utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = 1.0;
-    let voice = getVoice(lang === "en-US" ? "en-US" : "vi-VN");
-    if (voice) utterance.voice = voice;
-
-    // Ngắt nhịp 0.2s sau khi đọc xong
-    utterance.onend = () => setTimeout(resolve, 200);
-    utterance.onerror = () => resolve();
-    window.speechSynthesis.speak(utterance);
-  });
-}
-
-async function startListening() {
-  window.speechSynthesis.cancel(); // Dừng tất cả đang đọc
-  let start = parseInt(document.getElementById("listenStart").value, 10);
-  let end = parseInt(document.getElementById("listenEnd").value, 10);
-  let reps = parseInt(document.getElementById("listenRepetitions").value, 10);
-
-  if (isNaN(start) || start < 1) start = 1;
-  if (isNaN(end) || end > currentListenWords.length)
-    end = currentListenWords.length;
-  if (start > end) {
-    showToast("Vị trí bắt đầu không hợp lệ!");
+window.listenWords = function (words, startIdx = 0, endIdx = -1, loops = 1) {
+  if (!words || words.length === 0) {
+    showToast("Không có từ để đọc!", "error");
     return;
   }
-  if (isNaN(reps) || reps < 1) reps = 1;
 
-  listenState = {
-    active: true,
-    startIndex: start - 1, // 0-based
-    endIndex: end - 1, // 0-based
-    loops: reps,
-    currentLoop: 1,
-    currentIndex: start - 1,
-  };
-  window.listenState = listenState; // Update window object
+  if (!("speechSynthesis" in window)) {
+    showToast("❌ Trình duyệt không hỗ trợ Text-to-Speech!", "error");
+    return;
+  }
+
+  isListening = true;
+  if (endIdx === -1 || endIdx > words.length - 1) endIdx = words.length - 1;
+  if (startIdx < 0) startIdx = 0;
 
   document.getElementById("btnListenStart").style.display = "none";
   document.getElementById("btnListenStop").style.display = "inline-block";
   document.getElementById("listenStatus").style.display = "block";
 
-  await playListenLoop();
-}
+  let wordIndex = startIdx; // BẮT ĐẦU TỪ startIdx, KHÔNG PHẢI 0!
+  let currentLoop = 1;
+  let totalDelay = 0;
+  let currentNumber = startIdx + 1; // Track số hiển thị (từ 1, 2, 3, ...)
 
-window.startListening = startListening;
+  const playNextWord = () => {
+    if (!isListening) return;
 
-function stopListening() {
-  listenState.active = false;
+    if (wordIndex > endIdx) {
+      // Hết từ trong 1 loop
+      if (currentLoop < loops) {
+        // Còn loop tiếp
+        currentLoop++;
+        wordIndex = startIdx;
+        currentNumber = startIdx + 1; // Reset số hiển thị
+        // Delay trước loop tiếp
+        const timeoutId = setTimeout(playNextWord, 1500);
+        listenTimeoutIds.push(timeoutId);
+        return;
+      } else {
+        // Hết tất cả loops
+        document.getElementById("listenStatus").innerHTML =
+          "<b style='color: var(--primary);'>✅ Hoàn thành!</b>";
+        setTimeout(() => window.stopListen(), 1500);
+        return;
+      }
+    }
+
+    const word = words[wordIndex];
+    if (!word) {
+      wordIndex++;
+      currentNumber++;
+      playNextWord();
+      return;
+    }
+
+    // Update UI
+    document.getElementById("listenStatus").innerHTML =
+      `<b style="font-size:20px; color: var(--primary);">${currentNumber}. ${word.word}</b>
+       <div style="font-size:14px; color:#7f8c8d; margin-top:8px;">${word.definition}</div>
+       <div style="font-size:12px; color:#95a5a6; margin-top:5px;">Lặp ${currentLoop}/${loops}</div>`;
+
+    // Lấy voices
+    let voices = window.speechSynthesis.getVoices();
+    let enVoice = voices.find((v) => v.lang === "en-US" || v.lang === "en_US");
+    let viVoice = voices.find((v) => v.lang === "vi-VN" || v.lang === "vi_VN");
+
+    window.speechSynthesis.cancel();
+
+    let speakDelay = 0;
+
+    // CAPTURE currentNumber trước khi increment!
+    const capturedNumber = currentNumber;
+
+    // Đọc số trước (ví dụ: "number one")
+    const timeoutId0 = setTimeout(() => {
+      if (!isListening) return;
+      const numberText = "number " + numberToEnglish(capturedNumber);
+      const utterance = new SpeechSynthesisUtterance(numberText);
+      if (enVoice) utterance.voice = enVoice;
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }, speakDelay);
+    listenTimeoutIds.push(timeoutId0);
+    speakDelay += 1200;
+
+    // Đọc Tiếng Anh (split "/" nếu có)
+    const wordVariants = word.word
+      .split("/")
+      .map((w) => w.trim())
+      .filter((w) => w.length > 0);
+
+    wordVariants.forEach((variant, varIdx) => {
+      const timeoutId = setTimeout(() => {
+        if (!isListening) return;
+        const utterance = new SpeechSynthesisUtterance(variant);
+        if (enVoice) utterance.voice = enVoice;
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      }, speakDelay);
+      listenTimeoutIds.push(timeoutId);
+      speakDelay += 1800; // Tăng từ 1000 → 1800ms để đủ thời gian đọc từ + delay
+    });
+
+    // Đọc Tiếng Việt
+    const timeoutId2 = setTimeout(() => {
+      if (!isListening) return;
+      // Split definition nếu có "/" (ví dụ: "phục vụ / người phục vụ")
+      const defVariants = word.definition
+        .split("/")
+        .map((d) => d.trim())
+        .filter((d) => d.length > 0)
+        .join(", "); // Join với dấu phẩy để phát âm liền
+      const utterance = new SpeechSynthesisUtterance(defVariants);
+      if (viVoice) utterance.voice = viVoice;
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }, speakDelay);
+    listenTimeoutIds.push(timeoutId2);
+    speakDelay += 2200; // Tăng từ 1500 → 2200ms để đủ thời gian đọc định nghĩa
+
+    // Chuyển từ tiếp theo
+    wordIndex++;
+    currentNumber++;
+    const timeoutId3 = setTimeout(playNextWord, speakDelay);
+    listenTimeoutIds.push(timeoutId3);
+  };
+
+  playNextWord();
+};
+
+window.stopListen = function () {
+  isListening = false;
   window.speechSynthesis.cancel();
+
+  // Clear tất cả timeouts
+  listenTimeoutIds.forEach((id) => clearTimeout(id));
+  listenTimeoutIds = [];
+
   document.getElementById("listenStatus").style.display = "none";
   document.getElementById("btnListenStart").style.display = "inline-block";
   document.getElementById("btnListenStop").style.display = "none";
-}
+};
 
-window.stopListening = stopListening;
+// Mở modal nghe từ courseData
+window.openListenModal = function (courseId, lessonId) {
+  const course = courseData.find((c) => c.id === courseId);
+  if (!course) return;
+  const lesson = course.lessons.find((l) => l.id === lessonId);
+  if (!lesson) return;
 
-async function playListenLoop() {
-  if (!listenState.active) return;
+  const start = 1;
+  const end = Math.min(10, lesson.words.length);
+  const reps = 2;
 
-  while (listenState.currentLoop <= listenState.loops && listenState.active) {
-    listenState.currentIndex = listenState.startIndex;
+  document.getElementById("listenStart").value = start;
+  document.getElementById("listenEnd").value = end;
+  document.getElementById("listenEnd").max = lesson.words.length;
+  document.getElementById("listenRepetitions").value = reps;
+  document.getElementById("listenStatus").style.display = "none";
+  document.getElementById("btnListenStart").style.display = "inline-block";
+  document.getElementById("btnListenStop").style.display = "none";
 
-    while (
-      listenState.currentIndex <= listenState.endIndex &&
-      listenState.active
-    ) {
-      if (!listenState.active) break;
-      let wordObj = currentListenWords[listenState.currentIndex];
+  const overlay = document.getElementById("listenOverlay");
+  overlay.classList.add("show");
 
-      document.getElementById("listenStatus").innerHTML =
-        `Đang đọc (Lặp ${listenState.currentLoop}/${listenState.loops}):<br><br><b style="font-size:22px; color: var(--primary);">${listenState.currentIndex + 1}. ${wordObj.word}</b><br><span style="font-size:16px;">${wordObj.definition}</span>`;
+  // Set global data
+  window.currentListenWords = lesson.words;
+};
 
-      // 1. Đọc số thứ tự
-      await speakTextFast((listenState.currentIndex + 1).toString(), "en-US");
-      if (!listenState.active) break;
-
-      // 2. Đọc từ vựng Tiếng Anh (US)
-      await speakText(wordObj.word, "en-US");
-      if (!listenState.active) break;
-
-      // 3. Đọc nghĩa Tiếng Việt
-      await speakText(wordObj.definition, "vi-VN");
-      if (!listenState.active) break;
-
-      listenState.currentIndex++;
-    }
-
-    if (listenState.active) {
-      listenState.currentLoop++;
-    }
+// Mở modal nghe từ preparedData (preview)
+// Auto start listening (fromvocabulary preview)
+window.startListeningNow = function () {
+  if (!preparedData || preparedData.length === 0) {
+    showToast("Không có từ để đọc!", "error");
+    return;
   }
 
-  if (listenState.active) {
-    // Nếu tự chạy qua hết loops thì hoàn thành
-    document.getElementById("listenStatus").innerText = "Hoàn thành!";
-    setTimeout(() => {
-      stopListening();
-    }, 1500);
+  window.currentListenWords = preparedData;
+  // Mặc định: từ 1-10, 2 lần
+  const start = 0;
+  const end = Math.min(9, preparedData.length - 1);
+  const reps = 2;
+
+  window.listenWords(preparedData, start, end, reps);
+};
+
+// Open settings modal for preview page
+window.openListenSettings = function () {
+  if (!preparedData || preparedData.length === 0) {
+    showToast("Không có từ để đọc!", "error");
+    return;
   }
-}
+
+  // Set global data
+  window.currentListenWords = preparedData;
+
+  // Show modal settings
+  document.getElementById("listenStart").value = 1;
+  document.getElementById("listenEnd").value = Math.min(
+    10,
+    preparedData.length,
+  );
+  document.getElementById("listenEnd").max = preparedData.length;
+  document.getElementById("listenRepetitions").value = 2;
+  document.getElementById("listenStatus").style.display = "none";
+  document.getElementById("btnListenStart").style.display = "inline-block";
+  document.getElementById("btnListenStop").style.display = "none";
+
+  const overlay = document.getElementById("listenOverlay");
+  overlay.classList.add("show");
+};
+
+// Legacy function for backward compatibility
+window.openListenFromPreview = function () {
+  window.openListenSettings();
+};
+
+window.closeListenModal = function () {
+  document.getElementById("listenOverlay").classList.remove("show");
+  window.stopListen();
+};
+
+// Hàm xử lý click button "Bắt đầu"
+window.handleListenStart = function () {
+  if (isListening) {
+    showToast("Đang đọc, chờ chút...", "warning");
+    return;
+  }
+
+  const start = parseInt(document.getElementById("listenStart").value) || 1;
+  let end = parseInt(document.getElementById("listenEnd").value) || 10;
+  const reps =
+    parseInt(document.getElementById("listenRepetitions").value) || 1;
+  const words = window.currentListenWords || [];
+
+  if (words.length === 0) {
+    showToast("Không có từ để đọc!", "error");
+    return;
+  }
+
+  // Validate: end không được vượt quá số từ vựng
+  if (end > words.length) {
+    showToast(
+      `⚠️ Chỉ có ${words.length} từ! Chỉnh "Đến từ số" thành ${words.length}`,
+      "warning",
+    );
+    end = words.length;
+    document.getElementById("listenEnd").value = end;
+  }
+
+  // Validate: end phải >= start
+  if (end < start) {
+    showToast("❌ 'Đến từ số' phải lớn hơn 'Từ số'!", "error");
+    return;
+  }
+
+  window.listenWords(words, start - 1, end - 1, reps);
+};
+
+// Bind event listeners
+document.addEventListener("DOMContentLoaded", function () {
+  const btnStart = document.getElementById("btnListenStart");
+  if (btnStart) {
+    btnStart.onclick = window.handleListenStart;
+  }
+
+  const btnStop = document.getElementById("btnListenStop");
+  if (btnStop) {
+    btnStop.onclick = window.stopListen;
+  }
+});
