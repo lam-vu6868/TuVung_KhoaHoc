@@ -86,8 +86,6 @@ let mistakes = [];
 let flashcardData = [];
 let currentCardIndex = 0;
 
-
-
 // === Quản lý Kho Từ Vựng bằng LocalStorage ===
 let savedDecks = JSON.parse(localStorage.getItem("vocaDecks")) || [];
 let currentDeckId = null;
