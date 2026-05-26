@@ -10355,6 +10355,12 @@ function showDashboard() {
           </div>
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
             ${mistakesBtn}
+            <button class="main-btn" style="padding: 9px 16px; font-size: 13px; font-weight: 700; background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); color: white; border-radius: 8px; box-shadow: ${wordCount > 0 ? "0 3px 10px rgba(26, 188, 156, 0.25)" : "none"}; transition: all 0.3s ease; white-space: nowrap; border: none; ${cursor}" 
+              onmouseover="if(${wordCount} > 0) {this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(26, 188, 156, 0.4)';}"
+              onmouseout="if(${wordCount} > 0) {this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(26, 188, 156, 0.25)';}"
+              onclick="if(${wordCount} > 0) openListenModal('${course.id}', '${lesson.id}')">
+              🎧 Nghe
+            </button>
             <button class="main-btn btn-primary" style="padding: 9px 16px; font-size: 13px; font-weight: 700; background: ${btnBg}; color: white; border-radius: 8px; box-shadow: ${wordCount > 0 ? "0 3px 10px rgba(52, 152, 219, 0.25)" : "none"}; transition: all 0.3s ease; white-space: nowrap; border: none; ${cursor}" 
               onmouseover="if(${wordCount} > 0) {this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(52, 152, 219, 0.4)';}"
               onmouseout="if(${wordCount} > 0) {this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(52, 152, 219, 0.25)';}"
@@ -10435,6 +10441,7 @@ function playCourseLesson(courseId, lessonId) {
         `${course.title} - ${lesson.title}`;
       // Clone dữ liệu cứng ra để không đụng chạm tới JSON gốc
       preparedData = JSON.parse(JSON.stringify(lesson.words));
+      window.preparedData = preparedData; // Expose to window for listening
       renderPreviewHtml();
     }
   }
@@ -10456,6 +10463,7 @@ function playLessonMistakes(courseId, lessonId) {
       preparedData = JSON.parse(JSON.stringify(lesson.words)).filter((w) =>
         savedMistakes.includes(w.word),
       );
+      window.preparedData = preparedData; // Expose to window for listening
       renderPreviewHtml();
     }
   }
@@ -10467,6 +10475,7 @@ function playSelectedDeck(id) {
     currentDeckId = deck.id;
     document.getElementById("deckName").value = deck.name;
     preparedData = JSON.parse(JSON.stringify(deck.words)); // Clone dữ liệu
+    window.preparedData = preparedData; // Expose to window for listening
     renderPreviewHtml();
   }
 }
@@ -10480,6 +10489,7 @@ function playMistakesDeck(id) {
     preparedData = JSON.parse(JSON.stringify(deck.words)).filter((w) =>
       deck.mistakes.includes(w.word),
     );
+    window.preparedData = preparedData; // Expose to window for listening
     renderPreviewHtml();
   }
 }
@@ -10507,478 +10517,6 @@ function saveDeck() {
   localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
 }
 // ==========================================
-
-// Kho từ mồi 500 từ
-const dummyDistractors = [
-  { word: "apple", definition: "quả táo" },
-  { word: "banana", definition: "quả chuối" },
-  { word: "orange", definition: "quả cam" },
-  { word: "bread", definition: "bánh mì" },
-  { word: "milk", definition: "sữa" },
-  { word: "coffee", definition: "cà phê" },
-  { word: "water", definition: "nước" },
-  { word: "computer", definition: "máy tính" },
-  { word: "phone", definition: "điện thoại" },
-  { word: "house", definition: "ngôi nhà" },
-  { word: "car", definition: "ô tô" },
-  { word: "bicycle", definition: "xe đạp" },
-  { word: "dog", definition: "con chó" },
-  { word: "cat", definition: "con mèo" },
-  { word: "bird", definition: "con chim" },
-  { word: "teacher", definition: "giáo viên" },
-  { word: "student", definition: "học sinh" },
-  { word: "doctor", definition: "bác sĩ" },
-  { word: "nurse", definition: "y tá" },
-  { word: "engineer", definition: "kỹ sư" },
-  { word: "worker", definition: "công nhân" },
-  { word: "beautiful", definition: "xinh đẹp" },
-  { word: "ugly", definition: "xấu xí" },
-  { word: "happy", definition: "hạnh phúc" },
-  { word: "sad", definition: "buồn bã" },
-  { word: "angry", definition: "tức giận" },
-  { word: "scared", definition: "sợ hãi" },
-  { word: "big", definition: "to lớn" },
-  { word: "small", definition: "nhỏ bé" },
-  { word: "hot", definition: "nóng bức" },
-  { word: "cold", definition: "lạnh lẽo" },
-  { word: "fast", definition: "nhanh chóng" },
-  { word: "slow", definition: "chậm chạp" },
-  { word: "good", definition: "tốt bụng" },
-  { word: "bad", definition: "tồi tệ" },
-  { word: "run", definition: "chạy bộ" },
-  { word: "walk", definition: "đi bộ" },
-  { word: "swim", definition: "bơi lội" },
-  { word: "jump", definition: "nhảy lên" },
-  { word: "read", definition: "đọc sách" },
-  { word: "write", definition: "viết chữ" },
-  { word: "speak", definition: "nói chuyện" },
-  { word: "listen", definition: "lắng nghe" },
-  { word: "sleep", definition: "ngủ" },
-  { word: "eat", definition: "ăn uống" },
-  { word: "drink", definition: "uống nước" },
-  { word: "laugh", definition: "cười lớn" },
-  { word: "cry", definition: "khóc nhè" },
-  { word: "book", definition: "quyển sách" },
-  { word: "pen", definition: "bút mực" },
-  { word: "pencil", definition: "bút chì" },
-  { word: "paper", definition: "tờ giấy" },
-  { word: "table", definition: "cái bàn" },
-  { word: "chair", definition: "cái ghế" },
-  { word: "window", definition: "cửa sổ" },
-  { word: "door", definition: "cửa ra vào" },
-  { word: "school", definition: "trường học" },
-  { word: "class", definition: "lớp học" },
-  { word: "office", definition: "văn phòng" },
-  { word: "money", definition: "tiền bạc" },
-  { word: "market", definition: "chợ" },
-  { word: "shop", definition: "cửa hàng" },
-  { word: "hospital", definition: "bệnh viện" },
-  { word: "hotel", definition: "khách sạn" },
-  { word: "restaurant", definition: "nhà hàng" },
-  { word: "park", definition: "công viên" },
-  { word: "street", definition: "con đường" },
-  { word: "city", definition: "thành phố" },
-  { word: "country", definition: "quốc gia" },
-  { word: "world", definition: "thế giới" },
-  { word: "sky", definition: "bầu trời" },
-  { word: "sun", definition: "mặt trời" },
-  { word: "moon", definition: "mặt trăng" },
-  { word: "star", definition: "ngôi sao" },
-  { word: "tree", definition: "cây cối" },
-  { word: "flower", definition: "bông hoa" },
-  { word: "river", definition: "con sông" },
-  { word: "sea", definition: "biển cả" },
-  { word: "mountain", definition: "ngọn núi" },
-  { word: "rain", definition: "cơn mưa" },
-  { word: "wind", definition: "cơn gió" },
-  { word: "snow", definition: "tuyết rơi" },
-  { word: "fire", definition: "ngọn lửa" },
-  { word: "ice", definition: "băng đá" },
-  { word: "time", definition: "thời gian" },
-  { word: "day", definition: "ngày" },
-  { word: "night", definition: "đêm" },
-  { word: "morning", definition: "buổi sáng" },
-  { word: "evening", definition: "buổi tối" },
-  { word: "week", definition: "tuần" },
-  { word: "month", definition: "tháng" },
-  { word: "year", definition: "năm" },
-  { word: "clock", definition: "đồng hồ" },
-  { word: "shirt", definition: "áo sơ mi" },
-  { word: "pants", definition: "quần dài" },
-  { word: "shoes", definition: "đôi giày" },
-  { word: "hat", definition: "cái mũ" },
-  { word: "bag", definition: "cái túi" },
-  { word: "gold", definition: "vàng" },
-  { word: "silver", definition: "bạc" },
-  { word: "iron", definition: "sắt" },
-  { word: "wood", definition: "gỗ" },
-  { word: "stone", definition: "đá" },
-  { word: "glass", definition: "thủy tinh" },
-  { word: "plastic", definition: "nhựa" },
-  { word: "music", definition: "âm nhạc" },
-  { word: "song", definition: "bài hát" },
-  { word: "movie", definition: "bộ phim" },
-  { word: "game", definition: "trò chơi" },
-  { word: "sport", definition: "thể thao" },
-  { word: "football", definition: "bóng đá" },
-  { word: "tennis", definition: "quần vợt" },
-  { word: "chess", definition: "cờ vua" },
-  { word: "dance", definition: "nhảy múa" },
-  { word: "sing", definition: "ca hát" },
-  { word: "paint", definition: "vẽ tranh" },
-  { word: "cook", definition: "nấu ăn" },
-  { word: "travel", definition: "du lịch" },
-  { word: "fly", definition: "bay lượn" },
-  { word: "drive", definition: "lái xe" },
-  { word: "ride", definition: "cưỡi xe" },
-  { word: "buy", definition: "mua sắm" },
-  { word: "sell", definition: "bán hàng" },
-  { word: "pay", definition: "thanh toán" },
-  { word: "cost", definition: "giá cả" },
-  { word: "cheap", definition: "giá rẻ" },
-  { word: "expensive", definition: "đắt đỏ" },
-  { word: "rich", definition: "giàu có" },
-  { word: "poor", definition: "nghèo khổ" },
-  { word: "clean", definition: "sạch sẽ" },
-  { word: "dirty", definition: "bẩn thỉu" },
-  { word: "new", definition: "mới mẻ" },
-  { word: "old", definition: "cũ kỹ" },
-  { word: "young", definition: "trẻ tuổi" },
-  { word: "strong", definition: "mạnh mẽ" },
-  { word: "weak", definition: "yếu ớt" },
-  { word: "brave", definition: "dũng cảm" },
-  { word: "smart", definition: "thông minh" },
-  { word: "clever", definition: "khéo léo" },
-  { word: "stupid", definition: "ngốc nghếch" },
-  { word: "lazy", definition: "lười biếng" },
-  { word: "hardworking", definition: "chăm chỉ" },
-  { word: "kind", definition: "tốt bụng" },
-  { word: "cruel", definition: "độc ác" },
-  { word: "sweet", definition: "ngọt ngào" },
-  { word: "sour", definition: "chua chát" },
-  { word: "bitter", definition: "đắng ngắt" },
-  { word: "salty", definition: "mặn mà" },
-  { word: "delicious", definition: "thơm ngon" },
-  { word: "fresh", definition: "tươi sống" },
-  { word: "healthy", definition: "khỏe mạnh" },
-  { word: "sick", definition: "ốm đau" },
-  { word: "doctor", definition: "bác sĩ" },
-  { word: "medicine", definition: "thuốc men" },
-  { word: "pain", definition: "đau đớn" },
-  { word: "cure", definition: "chữa khỏi" },
-  { word: "body", definition: "cơ thể" },
-  { word: "head", definition: "cái đầu" },
-  { word: "face", definition: "khuôn mặt" },
-  { word: "eye", definition: "con mắt" },
-  { word: "ear", definition: "cái tai" },
-  { word: "nose", definition: "cái mũi" },
-  { word: "mouth", definition: "cái miệng" },
-  { word: "tooth", definition: "chiếc răng" },
-  { word: "hair", definition: "mái tóc" },
-  { word: "neck", definition: "cái cổ" },
-  { word: "arm", definition: "cánh tay" },
-  { word: "hand", definition: "bàn tay" },
-  { word: "finger", definition: "ngón tay" },
-  { word: "leg", definition: "cái chân" },
-  { word: "foot", definition: "bàn chân" },
-  { word: "heart", definition: "trái tim" },
-  { word: "blood", definition: "máu" },
-  { word: "brain", definition: "não bộ" },
-  { word: "family", definition: "gia đình" },
-  { word: "parents", definition: "cha mẹ" },
-  { word: "father", definition: "người cha" },
-  { word: "mother", definition: "người mẹ" },
-  { word: "son", definition: "con trai" },
-  { word: "daughter", definition: "con gái" },
-  { word: "brother", definition: "anh em trai" },
-  { word: "sister", definition: "chị em gái" },
-  { word: "baby", definition: "em bé" },
-  { word: "friend", definition: "bạn bè" },
-  { word: "enemy", definition: "kẻ thù" },
-  { word: "neighbor", definition: "hàng xóm" },
-  { word: "marriage", definition: "hôn nhân" },
-  { word: "love", definition: "tình yêu" },
-  { word: "hate", definition: "căm ghét" },
-  { word: "peace", definition: "hòa bình" },
-  { word: "war", definition: "chiến tranh" },
-  { word: "army", definition: "quân đội" },
-  { word: "soldier", definition: "người lính" },
-  { word: "weapon", definition: "vũ khí" },
-  { word: "danger", definition: "nguy hiểm" },
-  { word: "safety", definition: "an toàn" },
-  { word: "secret", definition: "bí mật" },
-  { word: "truth", definition: "sự thật" },
-  { word: "lie", definition: "lời nói dối" },
-  { word: "knowledge", definition: "kiến thức" },
-  { word: "wisdom", definition: "trí tuệ" },
-  { word: "history", definition: "lịch sử" },
-  { word: "science", definition: "khoa học" },
-  { word: "art", definition: "nghệ thuật" },
-  { word: "nature", definition: "tự nhiên" },
-  { word: "space", definition: "vũ trụ" },
-  { word: "earth", definition: "trái đất" },
-  { word: "animal", definition: "động vật" },
-  { word: "plant", definition: "thực vật" },
-  { word: "insect", definition: "côn trùng" },
-  { word: "fish", definition: "con cá" },
-  { word: "reptile", definition: "loài bò sát" },
-  { word: "bird", definition: "loài chim" },
-  { word: "lion", definition: "sư tử" },
-  { word: "tiger", definition: "con hổ" },
-  { word: "bear", definition: "con gấu" },
-  { word: "elephant", definition: "con voi" },
-  { word: "monkey", definition: "con khỉ" },
-  { word: "horse", definition: "con ngựa" },
-  { word: "cow", definition: "con bò" },
-  { word: "sheep", definition: "con cừu" },
-  { word: "pig", definition: "con lợn" },
-  { word: "chicken", definition: "con gà" },
-  { word: "duck", definition: "con vịt" },
-  { word: "mouse", definition: "con chuột" },
-  { word: "snake", definition: "con rắn" },
-  { word: "frog", definition: "con ếch" },
-  { word: "spider", definition: "con nhện" },
-  { word: "bee", definition: "con ong" },
-  { word: "ant", definition: "con kiến" },
-  { word: "butterfly", definition: "con bướm" },
-  { word: "forest", definition: "rừng rậm" },
-  { word: "desert", definition: "sa mạc" },
-  { word: "island", definition: "hòn đảo" },
-  { word: "lake", definition: "hồ nước" },
-  { word: "ocean", definition: "đại dương" },
-  { word: "beach", definition: "bãi biển" },
-  { word: "weather", definition: "thời tiết" },
-  { word: "climate", definition: "khí hậu" },
-  { word: "season", definition: "mùa" },
-  { word: "spring", definition: "mùa xuân" },
-  { word: "summer", definition: "mùa hè" },
-  { word: "autumn", definition: "mùa thu" },
-  { word: "winter", definition: "mùa đông" },
-  { word: "cloud", definition: "đám mây" },
-  { word: "fog", definition: "sương mù" },
-  { word: "storm", definition: "giông bão" },
-  { word: "thunder", definition: "sấm sét" },
-  { word: "lightning", definition: "tia chớp" },
-  { word: "temperature", definition: "nhiệt độ" },
-  { word: "degree", definition: "độ" },
-  { word: "heat", definition: "sức nóng" },
-  { word: "shadow", definition: "bóng râm" },
-  { word: "light", definition: "ánh sáng" },
-  { word: "darkness", definition: "bóng tối" },
-  { word: "color", definition: "màu sắc" },
-  { word: "red", definition: "màu đỏ" },
-  { word: "blue", definition: "màu xanh dương" },
-  { word: "green", definition: "màu xanh lá" },
-  { word: "yellow", definition: "màu vàng" },
-  { word: "black", definition: "màu đen" },
-  { word: "white", definition: "màu trắng" },
-  { word: "gray", definition: "màu xám" },
-  { word: "purple", definition: "màu tím" },
-  { word: "pink", definition: "màu hồng" },
-  { word: "brown", definition: "màu nâu" },
-  { word: "shape", definition: "hình dáng" },
-  { word: "circle", definition: "hình tròn" },
-  { word: "square", definition: "hình vuông" },
-  { word: "triangle", definition: "hình tam giác" },
-  { word: "line", definition: "đường thẳng" },
-  { word: "point", definition: "điểm" },
-  { word: "size", definition: "kích cỡ" },
-  { word: "weight", definition: "cân nặng" },
-  { word: "height", definition: "chiều cao" },
-  { word: "depth", definition: "chiều sâu" },
-  { word: "width", definition: "chiều rộng" },
-  { word: "length", definition: "chiều dài" },
-  { word: "distance", definition: "khoảng cách" },
-  { word: "number", definition: "con số" },
-  { word: "zero", definition: "số không" },
-  { word: "one", definition: "số một" },
-  { word: "first", definition: "đầu tiên" },
-  { word: "last", definition: "cuối cùng" },
-  { word: "many", definition: "nhiều" },
-  { word: "few", definition: "ít" },
-  { word: "all", definition: "tất cả" },
-  { word: "none", definition: "không ai" },
-  { word: "half", definition: "một nửa" },
-  { word: "whole", definition: "toàn bộ" },
-  { word: "piece", definition: "mảnh vụn" },
-  { word: "group", definition: "nhóm" },
-  { word: "crowd", definition: "đám đông" },
-  { word: "government", definition: "chính phủ" },
-  { word: "law", definition: "luật pháp" },
-  { word: "police", definition: "cảnh sát" },
-  { word: "judge", definition: "thẩm phán" },
-  { word: "court", definition: "tòa án" },
-  { word: "crime", definition: "tội phạm" },
-  { word: "prison", definition: "nhà tù" },
-  { word: "thief", definition: "tên trộm" },
-  { word: "murder", definition: "vụ giết người" },
-  { word: "accident", definition: "tai nạn" },
-  { word: "emergency", definition: "khẩn cấp" },
-  { word: "help", definition: "sự giúp đỡ" },
-  { word: "rescue", definition: "giải cứu" },
-  { word: "disaster", definition: "thảm họa" },
-  { word: "flood", definition: "lũ lụt" },
-  { word: "earthquake", definition: "động đất" },
-  { word: "building", definition: "tòa nhà" },
-  { word: "factory", definition: "nhà máy" },
-  { word: "station", definition: "nhà ga" },
-  { word: "airport", definition: "sân bay" },
-  { word: "bridge", definition: "cây cầu" },
-  { word: "wall", definition: "bức tường" },
-  { word: "roof", definition: "mái nhà" },
-  { word: "floor", definition: "sàn nhà" },
-  { word: "room", definition: "căn phòng" },
-  { word: "kitchen", definition: "nhà bếp" },
-  { word: "bathroom", definition: "phòng tắm" },
-  { word: "bedroom", definition: "phòng ngủ" },
-  { word: "bed", definition: "chiếc giường" },
-  { word: "mirror", definition: "gương soi" },
-  { word: "soap", definition: "xà phòng" },
-  { word: "towel", definition: "khăn tắm" },
-  { word: "blanket", definition: "chiếc chăn" },
-  { word: "pillow", definition: "chiếc gối" },
-  { word: "key", definition: "chìa khóa" },
-  { word: "lock", definition: "ổ khóa" },
-  { word: "tool", definition: "công cụ" },
-  { word: "hammer", definition: "cái búa" },
-  { word: "nail", definition: "chiếc đinh" },
-  { word: "screw", definition: "đinh vít" },
-  { word: "box", definition: "chiếc hộp" },
-  { word: "bag", definition: "cái bao" },
-  { word: "rope", definition: "dây thừng" },
-  { word: "wire", definition: "dây điện" },
-  { word: "machine", definition: "máy móc" },
-  { word: "engine", definition: "động cơ" },
-  { word: "wheel", definition: "bánh xe" },
-  { word: "pump", definition: "máy bơm" },
-  { word: "filter", definition: "bộ lọc" },
-  { word: "energy", definition: "năng lượng" },
-  { word: "power", definition: "sức mạnh" },
-  { word: "electricity", definition: "điện" },
-  { word: "fuel", definition: "nhiên liệu" },
-  { word: "gas", definition: "khí ga" },
-  { word: "oil", definition: "dầu ăn" },
-  { word: "coal", definition: "than đá" },
-  { word: "wood", definition: "gỗ củi" },
-  { word: "waste", definition: "rác thải" },
-  { word: "environment", definition: "môi trường" },
-  { word: "pollution", definition: "ô nhiễm" },
-  { word: "nature", definition: "thiên nhiên" },
-  { word: "scenery", definition: "phong cảnh" },
-  { word: "view", definition: "tầm nhìn" },
-  { word: "horizon", definition: "đường chân trời" },
-  { word: "island", definition: "hòn đảo" },
-  { word: "continent", definition: "lục địa" },
-  { word: "country", definition: "đất nước" },
-  { word: "nation", definition: "quốc gia" },
-  { word: "capital", definition: "thủ đô" },
-  { word: "village", definition: "ngôi làng" },
-  { word: "town", definition: "thị trấn" },
-  { word: "suburb", definition: "ngoại ô" },
-  { word: "border", definition: "biên giới" },
-  { word: "language", definition: "ngôn ngữ" },
-  { word: "word", definition: "từ ngữ" },
-  { word: "sentence", definition: "câu" },
-  { word: "meaning", definition: "ý nghĩa" },
-  { word: "grammar", definition: "ngữ pháp" },
-  { word: "pronunciation", definition: "phát âm" },
-  { word: "accent", definition: "giọng điệu" },
-  { word: "conversation", definition: "cuộc đối thoại" },
-  { word: "speech", definition: "bài phát biểu" },
-  { word: "voice", definition: "giọng nói" },
-  { word: "sound", definition: "âm thanh" },
-  { word: "silence", definition: "sự im lặng" },
-  { word: "noise", definition: "tiếng ồn" },
-  { word: "music", definition: "âm nhạc" },
-  { word: "melody", definition: "giai điệu" },
-  { word: "rhythm", definition: "nhịp điệu" },
-  { word: "instrument", definition: "nhạc cụ" },
-  { word: "guitar", definition: "đàn ghi-ta" },
-  { word: "piano", definition: "đàn pi-a-no" },
-  { word: "drum", definition: "cái trống" },
-  { word: "art", definition: "nghệ thuật" },
-  { word: "artist", definition: "nghệ sĩ" },
-  { word: "picture", definition: "bức tranh" },
-  { word: "photo", definition: "bức ảnh" },
-  { word: "museum", definition: "bảo tàng" },
-  { word: "gallery", definition: "triển lãm" },
-  { word: "theater", definition: "nhà hát" },
-  { word: "cinema", definition: "rạp phim" },
-  { word: "show", definition: "buổi biểu diễn" },
-  { word: "concert", definition: "buổi hòa nhạc" },
-  { word: "celebration", definition: "lễ kỷ niệm" },
-  { word: "party", definition: "bữa tiệc" },
-  { word: "festival", definition: "lễ hội" },
-  { word: "holiday", definition: "ngày lễ" },
-  { word: "vacation", definition: "kỳ nghỉ" },
-  { word: "weekend", definition: "cuối tuần" },
-  { word: "calendar", definition: "lịch" },
-  { word: "schedule", definition: "lịch trình" },
-  { word: "appointment", definition: "cuộc hẹn" },
-  { word: "meeting", definition: "cuộc họp" },
-  { word: "event", definition: "sự kiện" },
-  { word: "experience", definition: "kinh nghiệm" },
-  { word: "memory", definition: "ký ức" },
-  { word: "dream", definition: "giấc mơ" },
-  { word: "hope", definition: "hy vọng" },
-  { word: "wish", definition: "ước muốn" },
-  { word: "goal", definition: "mục tiêu" },
-  { word: "purpose", definition: "mục đích" },
-  { word: "plan", definition: "kế hoạch" },
-  { word: "idea", definition: "ý tưởng" },
-  { word: "thought", definition: "suy nghĩ" },
-  { word: "opinion", definition: "ý kiến" },
-  { word: "belief", definition: "niềm tin" },
-  { word: "religion", definition: "tôn giáo" },
-  { word: "culture", definition: "văn hóa" },
-  { word: "tradition", definition: "truyền thống" },
-  { word: "custom", definition: "phong tục" },
-  { word: "society", definition: "xã hội" },
-  { word: "community", definition: "cộng đồng" },
-  { word: "population", definition: "dân số" },
-  { word: "member", definition: "thành viên" },
-  { word: "leader", definition: "người lãnh đạo" },
-  { word: "boss", definition: "sếp" },
-  { word: "manager", definition: "quản lý" },
-  { word: "employee", definition: "nhân viên" },
-  { word: "colleague", definition: "đồng nghiệp" },
-  { word: "partner", definition: "đối tác" },
-  { word: "customer", definition: "khách hàng" },
-  { word: "client", definition: "khách hàng" },
-  { word: "business", definition: "kinh doanh" },
-  { word: "company", definition: "công ty" },
-  { word: "industry", definition: "ngành công nghiệp" },
-  { word: "trade", definition: "thương mại" },
-  { word: "commerce", definition: "thương mại" },
-  { word: "market", definition: "thị trường" },
-  { word: "sale", definition: "bán hàng" },
-  { word: "purchase", definition: "mua sắm" },
-  { word: "deal", definition: "giao dịch" },
-  { word: "agreement", definition: "thỏa thuận" },
-  { word: "contract", definition: "hợp đồng" },
-  { word: "signature", definition: "chữ ký" },
-  { word: "document", definition: "tài liệu" },
-  { word: "report", definition: "báo cáo" },
-  { word: "project", definition: "dự án" },
-  { word: "task", definition: "nhiệm vụ" },
-  { word: "duty", definition: "nghĩa vụ" },
-  { word: "responsibility", definition: "trách nhiệm" },
-  { word: "success", definition: "sự thành công" },
-  { word: "failure", definition: "sự thất bại" },
-  { word: "mistake", definition: "sai lầm" },
-  { word: "error", definition: "lỗi" },
-  { word: "fault", definition: "lỗi lầm" },
-  { word: "problem", definition: "vấn đề" },
-  { word: "solution", definition: "giải pháp" },
-  { word: "answer", definition: "câu trả lời" },
-  { word: "question", definition: "câu hỏi" },
-  { word: "test", definition: "bài kiểm tra" },
-  { word: "exam", definition: "kỳ thi" },
-  { word: "result", definition: "kết quả" },
-  { word: "score", definition: "điểm số" },
-  { word: "grade", definition: "lớp/điểm" },
-  { word: "mark", definition: "điểm dấu" },
-];
 
 function speakWord(word, accent) {
   if (!("speechSynthesis" in window)) return;
@@ -11182,6 +10720,7 @@ async function loadAndPreviewWords() {
   }
 
   inputSection.style.display = "none";
+  window.preparedData = preparedData; // Expose to window for listening
   renderPreviewHtml();
 }
 
@@ -11213,6 +10752,7 @@ function renderPreviewHtml() {
   let previewHtml = `
           <h3>🔍 Xem trước & Chỉnh sửa nghĩa</h3>
           <p style="color:#7f8c8d; font-size:14px; margin-bottom:15px;">Chỉnh sửa nghĩa tiếng Việt (nếu cần) trước khi bắt đầu học nhé!</p>
+          <button class="main-btn" style="width:100%; margin-bottom:15px; background: linear-gradient(135deg, #27ae60 0%, #229954 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="openListenFromPreview()">🎧 Nghe từng từ</button>
           <div class="preview-list" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px; padding-right:5px;">
         `;
 
@@ -11823,9 +11363,214 @@ window.redoMistakes = (mode) => {
   preparedData = preparedData.filter((item) =>
     mistakeWords.includes(item.word.toLowerCase()),
   );
+  window.preparedData = preparedData; // Expose to window for listening
 
   document.getElementById("statsArea").style.display = "none";
   document.getElementById("quizArea").innerHTML = "";
 
   startApp(mode);
 };
+
+// -------------------------------------------------------------
+// TEXT-TO-SPEECH (NGHE TỪ VỰNG TỰ ĐỘNG)
+// -------------------------------------------------------------
+let currentListenWords = [];
+let listenState = {
+  active: false,
+  startIndex: 0,
+  endIndex: 0,
+  loops: 1,
+  currentLoop: 1,
+  currentIndex: 0,
+};
+
+// Expose to window object for global access
+window.currentListenWords = currentListenWords;
+window.listenState = listenState;
+
+window.speechSynthesis.onvoiceschanged = function () {
+  window.speechSynthesis.getVoices();
+};
+
+function openListenModal(courseId, lessonId) {
+  let course = courseData.find((c) => c.id === courseId);
+  if (!course) return;
+  let lesson = course.lessons.find((l) => l.id === lessonId);
+  if (!lesson) return;
+
+  currentListenWords = lesson.words;
+  window.currentListenWords = lesson.words; // Update window object
+
+  document.getElementById("listenStart").value = 1;
+  document.getElementById("listenEnd").value = Math.min(
+    10,
+    currentListenWords.length,
+  );
+  document.getElementById("listenEnd").max = currentListenWords.length;
+  document.getElementById("listenRepetitions").value = 2;
+
+  document.getElementById("listenStatus").style.display = "none";
+  document.getElementById("btnListenStart").style.display = "inline-block";
+  document.getElementById("btnListenStop").style.display = "none";
+
+  document.getElementById("listenOverlay").style.display = "flex";
+}
+
+window.openListenModal = openListenModal;
+
+function openListenFromPreview() {
+  // Use preparedData (currently being edited/previewed) instead of courseData
+  currentListenWords = preparedData;
+  window.currentListenWords = preparedData; // Update window object
+
+  document.getElementById("listenStart").value = 1;
+  document.getElementById("listenEnd").value = Math.min(
+    10,
+    currentListenWords.length,
+  );
+  document.getElementById("listenEnd").max = currentListenWords.length;
+  document.getElementById("listenRepetitions").value = 2;
+
+  document.getElementById("listenStatus").style.display = "none";
+  document.getElementById("btnListenStart").style.display = "inline-block";
+  document.getElementById("btnListenStop").style.display = "none";
+
+  document.getElementById("listenOverlay").style.display = "flex";
+}
+
+window.openListenFromPreview = openListenFromPreview;
+
+function closeListenModal() {
+  document.getElementById("listenOverlay").style.display = "none";
+  stopListening();
+}
+window.closeListenModal = closeListenModal;
+
+function getVoice(langCode) {
+  let voices = window.speechSynthesis.getVoices();
+  for (let i = 0; i < voices.length; i++) {
+    if (voices[i].lang.indexOf(langCode) === 0) return voices[i];
+  }
+  return null;
+}
+
+function speakText(text, lang) {
+  return new Promise((resolve) => {
+    if (!listenState.active) return resolve();
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = lang;
+    utterance.rate = 0.9;
+    let voice = getVoice(lang === "en-US" ? "en-US" : "vi-VN");
+    if (voice) utterance.voice = voice;
+
+    // Ngắt nhịp 0.6s sau khi đọc xong
+    utterance.onend = () => setTimeout(resolve, 600);
+    utterance.onerror = () => resolve();
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+function speakTextFast(text, lang) {
+  return new Promise((resolve) => {
+    if (!listenState.active) return resolve();
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = lang;
+    utterance.rate = 1.0;
+    let voice = getVoice(lang === "en-US" ? "en-US" : "vi-VN");
+    if (voice) utterance.voice = voice;
+
+    // Ngắt nhịp 0.2s sau khi đọc xong
+    utterance.onend = () => setTimeout(resolve, 200);
+    utterance.onerror = () => resolve();
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+async function startListening() {
+  window.speechSynthesis.cancel(); // Dừng tất cả đang đọc
+  let start = parseInt(document.getElementById("listenStart").value, 10);
+  let end = parseInt(document.getElementById("listenEnd").value, 10);
+  let reps = parseInt(document.getElementById("listenRepetitions").value, 10);
+
+  if (isNaN(start) || start < 1) start = 1;
+  if (isNaN(end) || end > currentListenWords.length)
+    end = currentListenWords.length;
+  if (start > end) {
+    showToast("Vị trí bắt đầu không hợp lệ!");
+    return;
+  }
+  if (isNaN(reps) || reps < 1) reps = 1;
+
+  listenState = {
+    active: true,
+    startIndex: start - 1, // 0-based
+    endIndex: end - 1, // 0-based
+    loops: reps,
+    currentLoop: 1,
+    currentIndex: start - 1,
+  };
+  window.listenState = listenState; // Update window object
+
+  document.getElementById("btnListenStart").style.display = "none";
+  document.getElementById("btnListenStop").style.display = "inline-block";
+  document.getElementById("listenStatus").style.display = "block";
+
+  await playListenLoop();
+}
+
+window.startListening = startListening;
+
+function stopListening() {
+  listenState.active = false;
+  window.speechSynthesis.cancel();
+  document.getElementById("listenStatus").style.display = "none";
+  document.getElementById("btnListenStart").style.display = "inline-block";
+  document.getElementById("btnListenStop").style.display = "none";
+}
+
+window.stopListening = stopListening;
+
+async function playListenLoop() {
+  if (!listenState.active) return;
+
+  while (listenState.currentLoop <= listenState.loops && listenState.active) {
+    listenState.currentIndex = listenState.startIndex;
+
+    while (
+      listenState.currentIndex <= listenState.endIndex &&
+      listenState.active
+    ) {
+      if (!listenState.active) break;
+      let wordObj = currentListenWords[listenState.currentIndex];
+
+      document.getElementById("listenStatus").innerHTML =
+        `Đang đọc (Lặp ${listenState.currentLoop}/${listenState.loops}):<br><br><b style="font-size:22px; color: var(--primary);">${listenState.currentIndex + 1}. ${wordObj.word}</b><br><span style="font-size:16px;">${wordObj.definition}</span>`;
+
+      // 1. Đọc số thứ tự
+      await speakTextFast((listenState.currentIndex + 1).toString(), "en-US");
+      if (!listenState.active) break;
+
+      // 2. Đọc từ vựng Tiếng Anh (US)
+      await speakText(wordObj.word, "en-US");
+      if (!listenState.active) break;
+
+      // 3. Đọc nghĩa Tiếng Việt
+      await speakText(wordObj.definition, "vi-VN");
+      if (!listenState.active) break;
+
+      listenState.currentIndex++;
+    }
+
+    if (listenState.active) {
+      listenState.currentLoop++;
+    }
+  }
+
+  if (listenState.active) {
+    // Nếu tự chạy qua hết loops thì hoàn thành
+    document.getElementById("listenStatus").innerText = "Hoàn thành!";
+    setTimeout(() => {
+      stopListening();
+    }, 1500);
+  }
+}

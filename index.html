@@ -36,6 +36,113 @@
       </div>
     </div>
 
+    <!-- Listen Modal -->
+    <div id="listenOverlay" class="confirm-overlay" style="display: none">
+      <div
+        class="confirm-modal"
+        style="text-align: center; max-width: 400px; width: 90%"
+      >
+        <h3>🎧 Cài đặt Nghe Từ Vựng</h3>
+        <p style="margin-bottom: 20px; font-size: 14px; color: #7f8c8d">
+          Thiết lập chế độ đọc (US) - English -> Vietnamese
+        </p>
+        <div style="text-align: left; margin-bottom: 15px">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px"
+            >Từ số:</label
+          >
+          <input
+            type="number"
+            id="listenStart"
+            value="1"
+            min="1"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            "
+          />
+        </div>
+        <div style="text-align: left; margin-bottom: 15px">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px"
+            >Đến từ số:</label
+          >
+          <input
+            type="number"
+            id="listenEnd"
+            value="10"
+            min="1"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            "
+          />
+        </div>
+        <div style="text-align: left; margin-bottom: 20px">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px"
+            >Số vòng lặp (Repeat):</label
+          >
+          <input
+            type="number"
+            id="listenRepetitions"
+            value="2"
+            min="1"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            "
+          />
+        </div>
+
+        <div
+          id="listenStatus"
+          style="
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none;
+          "
+        >
+          Đang đọc...
+        </div>
+
+        <div class="confirm-buttons" style="justify-content: center; gap: 10px">
+          <button
+            class="main-btn"
+            onclick="closeListenModal()"
+            style="background: #95a5a6; color: white; border: none"
+          >
+            Đóng
+          </button>
+          <button
+            id="btnListenStop"
+            class="main-btn"
+            onclick="stopListening()"
+            style="
+              background: #e74c3c;
+              color: white;
+              border: none;
+              display: none;
+            "
+          >
+            Dừng
+          </button>
+          <button
+            id="btnListenStart"
+            class="main-btn"
+            onclick="startListening()"
+            style="background: #27ae60; color: white; border: none"
+          >
+            ▶ Bắt đầu
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Giao diện Quản lý bộ từ (2 Cột) -->
     <div
       id="dashboardSection"
@@ -123,5 +230,6 @@
     <div id="quizArea"></div>
     <div id="statsArea" class="stats-card"></div>
   </body>
+  <script src="./dummyDistractors.js"></script>
   <script src="./javascript.js"></script>
 </html>
