@@ -322,7 +322,7 @@ const courseData = [
           },
           {
             word: "brush my teeth",
-            definition: "đánh răng của tôi",
+            definition: "đánh răng ",
             ipa: "/brʌʃ maɪ tiːθ/",
             pos: "Cụm từ",
             imageUrl:
@@ -330,7 +330,7 @@ const courseData = [
           },
           {
             word: "wash my face",
-            definition: "rửa mặt của tôi",
+            definition: "rửa mặt ",
             ipa: "/wɒʃ maɪ feɪs/",
             pos: "Cụm từ",
             imageUrl:
