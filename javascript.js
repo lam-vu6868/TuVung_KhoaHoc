@@ -977,8 +977,8 @@ function renderFlashcard() {
   let defaultBg =
     "linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%)";
   let cardBackStyle = item.imageUrl
-    ? `background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('${item.imageUrl}') center/cover;`
-    : `background: ${defaultBg};`;
+    ? `background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('${item.imageUrl}') center/cover; background-attachment: fixed; position: relative;`
+    : `background: ${defaultBg}; position: relative;`;
 
   quizArea.innerHTML = `
           <div>
@@ -1005,9 +1005,14 @@ function renderFlashcard() {
                   </div>
                 </div>
                 <div class="flip-card-back" id="fcBackBg_${currentCardIndex}" style="${cardBackStyle}">
-                  <div class="fc-def-container" style="width: 80%; display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                    <input type="text" class="preview-input" style="width: 100%; text-align: center; font-size: 28px; font-weight: 800; background: transparent; color: white; border: 2px dashed rgba(255,255,255,0.5); padding: 5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);" value="${item.definition}" onclick="event.stopPropagation()" onchange="updateFlashcardDef(${currentCardIndex}, this.value)" title="Nhấn để sửa nghĩa">
-                    ${item.example ? `<div style="font-size: 16px; font-style: italic; color: #f1f2f6; text-shadow: 1px 1px 3px rgba(0,0,0,0.6); padding: 0 10px; text-align: center;">"${item.example}"</div>` : ""}
+                  <div class="fc-def-container" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; position: relative; padding: 0;">
+                    <!-- Định nghĩa và ví dụ ở góc dưới phải -->
+                    <div style="position: absolute; bottom: 15px; right: 15px; text-align: right; max-width: 40%; z-index: 10; background: rgba(0,0,0,0.5); padding: 10px 12px; border-radius: 8px; backdrop-filter: blur(5px);">
+                      <div style="color: #ffffff; font-size: 15px; font-weight: 700; margin-bottom: 6px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); line-height: 1.3;">
+                        ${item.definition}
+                      </div>
+                      ${item.example ? `<div style="color: #f1f2f6; font-size: 13px; font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); line-height: 1.3;">"${item.example}"</div>` : ""}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1528,8 +1533,14 @@ window.closeListenModal = function () {
 
 // Hàm xử lý click button "Bắt đầu"
 window.handleListenStart = function () {
+  // Clear previous errors
+  document.getElementById("listenError").style.display = "none";
+  document.getElementById("listenError").innerHTML = "";
+
   if (isListening) {
-    showToast("Đang đọc, chờ chút...", "warning");
+    document.getElementById("listenError").innerHTML =
+      "⚠️ Đang đọc, chờ chút...";
+    document.getElementById("listenError").style.display = "block";
     return;
   }
 
@@ -1540,23 +1551,26 @@ window.handleListenStart = function () {
   const words = window.currentListenWords || [];
 
   if (words.length === 0) {
-    showToast("Không có từ để đọc!", "error");
+    document.getElementById("listenError").innerHTML = "❌ Không có từ để đọc!";
+    document.getElementById("listenError").style.display = "block";
     return;
   }
 
   // Validate: end không được vượt quá số từ vựng
   if (end > words.length) {
-    showToast(
-      `⚠️ Chỉ có ${words.length} từ! Chỉnh "Đến từ số" thành ${words.length}`,
-      "warning",
-    );
+    document.getElementById("listenError").innerHTML =
+      `⚠️ Chỉ có ${words.length} từ! Chỉnh "Đến từ số" thành ${words.length}`;
+    document.getElementById("listenError").style.display = "block";
     end = words.length;
     document.getElementById("listenEnd").value = end;
+    return;
   }
 
   // Validate: end phải >= start
   if (end < start) {
-    showToast("❌ 'Đến từ số' phải lớn hơn 'Từ số'!", "error");
+    document.getElementById("listenError").innerHTML =
+      "❌ 'Đến từ số' phải lớn hơn 'Từ số'!";
+    document.getElementById("listenError").style.display = "block";
     return;
   }
 
