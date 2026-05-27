@@ -1357,40 +1357,50 @@ window.listenWords = function (words, startIdx = 0, endIdx = -1, loops = 1) {
       .map((w) => w.trim())
       .filter((w) => w.length > 0);
 
-    wordVariants.forEach((variant, varIdx) => {
-      const timeoutId = setTimeout(() => {
-        if (!isListening) return;
+    // Đọc tiếng Anh với event onend để đợi xong rồi mới đọc tiếng Việt
+    const timeoutId = setTimeout(() => {
+      if (!isListening) return;
+      let lastEnglishUtterance;
+      wordVariants.forEach((variant, varIdx) => {
         const utterance = new SpeechSynthesisUtterance(variant);
         if (enVoice) utterance.voice = enVoice;
         utterance.rate = 0.9;
+        lastEnglishUtterance = utterance;
         window.speechSynthesis.speak(utterance);
-      }, speakDelay);
-      listenTimeoutIds.push(timeoutId);
-      speakDelay += 1800; // Tăng từ 1000 → 1800ms để đủ thời gian đọc từ + delay
-    });
+      });
 
-    // Đọc Tiếng Việt
-    const timeoutId2 = setTimeout(() => {
-      if (!isListening) return;
-      // Split definition nếu có "/" (ví dụ: "phục vụ / người phục vụ")
-      const defVariants = word.definition
-        .split("/")
-        .map((d) => d.trim())
-        .filter((d) => d.length > 0)
-        .join(", "); // Join với dấu phẩy để phát âm liền
-      const utterance = new SpeechSynthesisUtterance(defVariants);
-      if (viVoice) utterance.voice = viVoice;
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
+      // Sau khi đọc xong tiếng Anh, mới đọc tiếng Việt
+      if (lastEnglishUtterance) {
+        lastEnglishUtterance.onend = () => {
+          if (!isListening) return;
+          // Delay nhỏ giữa tiếng Anh và tiếng Việt
+          setTimeout(() => {
+            if (!isListening) return;
+            // Split definition nếu có "/" (ví dụ: "phục vụ / người phục vụ")
+            const defVariants = word.definition
+              .split("/")
+              .map((d) => d.trim())
+              .filter((d) => d.length > 0)
+              .join(", "); // Join với dấu phẩy để phát âm liền
+            const utterance = new SpeechSynthesisUtterance(defVariants);
+            if (viVoice) utterance.voice = viVoice;
+            utterance.rate = 0.9;
+
+            // Sau khi đọc xong tiếng Việt, mới qua từ tiếp theo
+            utterance.onend = () => {
+              if (!isListening) return;
+              wordIndex++;
+              currentNumber++;
+              setTimeout(playNextWord, 1000); // Delay 1 giây trước từ kế tiếp
+            };
+
+            window.speechSynthesis.speak(utterance);
+          }, 300); // Delay 300ms giữa tiếng Anh và Việt
+        };
+      }
     }, speakDelay);
-    listenTimeoutIds.push(timeoutId2);
-    speakDelay += 2200; // Tăng từ 1500 → 2200ms để đủ thời gian đọc định nghĩa
-
-    // Chuyển từ tiếp theo
-    wordIndex++;
-    currentNumber++;
-    const timeoutId3 = setTimeout(playNextWord, speakDelay);
-    listenTimeoutIds.push(timeoutId3);
+    listenTimeoutIds.push(timeoutId);
+    speakDelay += 500; // Chỉ cần delay nhỏ vì event onend sẽ xử lý
   };
 
   playNextWord();
