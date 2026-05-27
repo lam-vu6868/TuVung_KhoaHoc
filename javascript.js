@@ -891,8 +891,8 @@ function startApp(mode) {
               <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1);">
                 <p style="margin: 8px 0; font-size: 13px; color: #555;"><b>IPA:</b> ${item.ipa || "N/A"}</p>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button style="padding: 6px 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'" onclick="speakWord('${item.word}', 'en-US')">🔊 A-A (US)</button>
-                  <button style="padding: 6px 12px; background: #2980b9; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#1f618d'" onmouseout="this.style.background='#2980b9'" onclick="speakWord('${item.word}', 'en-GB')">🔊 A-M (UK)</button>
+                  <button style="padding: 6px 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'" onclick="speakWord('${item.word}', 'en-US')">🔊 (US)</button>
+                  <button style="padding: 6px 12px; background: #2980b9; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#1f618d'" onmouseout="this.style.background='#2980b9'" onclick="speakWord('${item.word}', 'en-GB')">🔊 (UK)</button>
                 </div>
               </div>`;
             explanationDiv.style.background = "#eafaf1";
