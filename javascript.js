@@ -653,14 +653,14 @@ function renderPreviewHtml() {
 
   // 🔧 Bỏ preview section, đi thẳng vào chọn mode
   let previewHtml = `
-          <p style="font-weight:800; color:var(--primary-dark); margin-bottom:10px; text-align:center; font-size:18px;">🎯 CHỌN CHẾ ĐỘ BẮT ĐẦU HỌC:</p>
-          <p style="color:#7f8c8d; font-size:14px; margin-bottom:20px; text-align:center;\">${preparedData.length} từ vựng đã chuẩn bị sẵn sàng!</p>
+          <p style="font-weight:900; color:var(--primary-dark); margin-bottom:8px; text-align:center; font-size:24px;">🎯 CHỌN CHẾ ĐỘ HỌC</p>
+          <p style="color:#7f8c8d; font-size:15px; margin-bottom:35px; text-align:center; font-weight:600;">${preparedData.length} từ vựng đã chuẩn bị sẵn sàng!</p>
           <div class="btn-group">
-            <button class="main-btn btn-flashcard" onclick="startApp('flashcard')">🗂️ Lật Thẻ</button>
-            <button class="main-btn btn-quiz" onclick="startApp('quiz')">📝 Trắc Nghiệm</button>
-            <button class="main-btn btn-spell" onclick="startApp('spell')">⌨️ Gõ Từ</button>
+            <button class="main-btn btn-flashcard" onclick="startApp('flashcard')" style="font-size:13px;">🗂️<br>LẬT<br>THẺ</button>
+            <button class="main-btn btn-quiz" onclick="startApp('quiz')" style="font-size:13px;">📝<br>TRẮC<br>NGHIỆM</button>
+            <button class="main-btn btn-spell" onclick="startApp('spell')" style="font-size:13px;">⌨️<br>GỎ<br>TỪ</button>
           </div>
-          <button class="main-btn" style="width:100%; margin-top:15px; background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%); box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); font-weight: 700;" onclick="goBackToDashboard()">🎓 Quay lại</button>
+          <button class="main-btn btn-primary" style="width:100%; margin-top:28px; min-height:50px; font-size:16px;" onclick="goBackToDashboard()">🎓 QUAY LẠI TRANG CHỦ</button>
         `;
   previewSection.innerHTML = previewHtml;
 }
@@ -814,6 +814,7 @@ function startApp(mode) {
               .querySelectorAll(".option")
               .forEach((el) => el.classList.add("disabled"));
             answeredQuestions++;
+            questionDiv.classList.add("answered");
             explanationDiv.style.display = "block";
 
             if (opt.definition === item.definition) {
@@ -872,6 +873,7 @@ function startApp(mode) {
           inputField.disabled = true;
           checkBtn.disabled = true;
           answeredQuestions++;
+          questionDiv.classList.add("answered");
           explanationDiv.style.display = "block";
 
           // Normalize spaces around "/" for correct matching: "tooth / teeth" -> "tooth/teeth"
@@ -911,8 +913,8 @@ function startApp(mode) {
               <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.1);">
                 <p style="margin: 8px 0; font-size: 13px; color: #555;"><b>IPA:</b> ${item.ipa || "N/A"}</p>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button style="padding: 6px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#c0392b'" onmouseout="this.style.background='#e74c3c'" onclick="speakWord('${item.word}', 'en-US')">🔊 A-A (US)</button>
-                  <button style="padding: 6px 12px; background: #e67e22; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#d35400'" onmouseout="this.style.background='#e67e22'" onclick="speakWord('${item.word}', 'en-GB')">🔊 A-M (UK)</button>
+                  <button style="padding: 6px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#c0392b'" onmouseout="this.style.background='#e74c3c'" onclick="speakWord('${item.word}', 'en-US')">🔊 (US)</button>
+                  <button style="padding: 6px 12px; background: #e67e22; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;" onmouseover="this.style.background='#d35400'" onmouseout="this.style.background='#e67e22'" onclick="speakWord('${item.word}', 'en-GB')">🔊 (UK)</button>
                 </div>
               </div>`;
             explanationDiv.style.background = "#fdedec";
