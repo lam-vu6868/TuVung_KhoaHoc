@@ -92,7 +92,32 @@ let currentDeckId = null;
 
 // Lọc bỏ các course lessons bị save nhầm vào localStorage (fix bug)
 savedDecks = savedDecks.filter((d) => !d.id.startsWith("course_"));
-localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+
+// 🔧 Loại bỏ imageUrl khỏi dữ liệu đã lưu (tiết kiệm bộ nhớ)
+savedDecks = savedDecks.map((deck) => ({
+  ...deck,
+  words: (deck.words || []).map((w) => {
+    let { imageUrl, ...rest } = w;
+    return rest;
+  }),
+}));
+
+// Lưu lại localStorage sau khi dọn dẹp
+try {
+  localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+} catch (e) {
+  // Nếu vẫn tràn, xóa 50% dữ liệu cũ nhất
+  if (e.name === "QuotaExceededError" && savedDecks.length > 0) {
+    let half = Math.floor(savedDecks.length / 2);
+    savedDecks = savedDecks.slice(half);
+    try {
+      localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+      console.log("✅ Dọn dẹp localStorage thành công");
+    } catch (e2) {
+      console.warn("⚠️ Không thể dọn dẹp localStorage");
+    }
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   // Check Web Speech API availability
@@ -369,18 +394,45 @@ function saveDeck() {
   if (deckId && deckId.startsWith("course_")) {
     deckId = Date.now().toString(); // Tạo ID mới cho bộ tự tạo
   }
+
+  // 🔧 Loại bỏ imageUrl trước khi lưu (để giảm dung lượng localStorage)
+  let wordsToSave = preparedData.map((w) => ({
+    word: w.word,
+    definition: w.definition,
+    ipa: w.ipa,
+    pos: w.pos,
+    example: w.example,
+    // Bỏ imageUrl để tiết kiệm dung lượng
+  }));
+
   let existingIdx = savedDecks.findIndex((d) => d.id === deckId);
   if (existingIdx >= 0) {
     savedDecks[existingIdx].name = name;
-    savedDecks[existingIdx].words = preparedData;
+    savedDecks[existingIdx].words = wordsToSave;
   } else {
     savedDecks.push({
       id: deckId || Date.now().toString(),
       name: name,
-      words: preparedData,
+      words: wordsToSave,
     });
   }
-  localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+
+  try {
+    localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+  } catch (e) {
+    if (e.name === "QuotaExceededError") {
+      // Xóa cache cũ (giữ lại 5 bộ từ gần nhất)
+      if (savedDecks.length > 5) {
+        savedDecks = savedDecks.slice(-5);
+        try {
+          localStorage.setItem("vocaDecks", JSON.stringify(savedDecks));
+          showToast("✅ Dọn dẹp bộ nhớ cũ thành công", "success");
+        } catch (e2) {
+          showToast("❌ Bộ nhớ trình duyệt đã đầy! Xin lỗi 😢", "error");
+        }
+      }
+    }
+  }
 }
 // ==========================================
 
@@ -1029,7 +1081,9 @@ function renderFlashcard() {
           </div>
         `;
 
-  // Tự động tải ảnh từ API Wikipedia (Dùng Search Mode để khớp đa dạng hơn)
+  // 🔧 TẮT auto-fetch image để tránh localStorage tràn
+  // Nếu cần image, hãy thêm image URL thủ công vào courseData hoặc bộ từ
+  /*
   if (item.imageUrl === undefined) {
     fetch(
       `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(item.word)}%20-intitle:"disambiguation"&gsrlimit=3&prop=pageimages&format=json&pithumbsize=600&origin=*`,
@@ -1091,7 +1145,8 @@ function renderFlashcard() {
               backEl.style.background = `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('${item.imageUrl}') center/cover`;
             }
           }
-          saveDeck(); // Lưu lại vào máy
+          // 🔧 Tắt saveDeck() để không tràn localStorage
+          // saveDeck();
         } else {
           item.imageUrl = false; // Đánh dấu là không tìm thấy
           let targetItem = preparedData.find((p) => p.word === item.word);
@@ -1102,6 +1157,7 @@ function renderFlashcard() {
         item.imageUrl = false;
       });
   }
+  */
 }
 
 window.updateFlashcardPos = (index, value) => {
