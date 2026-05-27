@@ -651,64 +651,10 @@ function renderPreviewHtml() {
   document.getElementById("statsArea").style.display = "none";
   document.getElementById("progressContainer").style.display = "none";
 
-  const posList = [
-    "Danh từ (n)",
-    "Động từ (v)",
-    "Tính từ (adj)",
-    "Trạng từ (adv)",
-    "Tính/Trạng từ (adj/adv)",
-    "Đại từ (pron)",
-    "Giới từ (prep)",
-    "Liên từ (conj)",
-    "Thán từ (int)",
-    "Cụm từ",
-    "Cụm động từ",
-    "Từ vựng",
-    "Từ loại khác",
-  ];
-
+  // 🔧 Bỏ preview section, đi thẳng vào chọn mode
   let previewHtml = `
-          <h3>🔍 Xem trước & Chỉnh sửa nghĩa</h3>
-          <p style="color:#7f8c8d; font-size:14px; margin-bottom:15px;">Chỉnh sửa nghĩa tiếng Việt (nếu cần) trước khi bắt đầu học nhé!</p>
-          <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <button class="main-btn" style="flex: 1; background: linear-gradient(135deg, #27ae60 0%, #229954 100%); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="window.startListeningNow(); display: none">🎧 Nghe từng từ</button>
-            <button class="main-btn" style="flex: 0 0 auto; background: #3498db; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); font-weight: 700;" onclick="window.openListenSettings()">⚙️ Cài đặt</button>
-          </div>
-          <div class="preview-list" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px; padding-right:5px;">
-        `;
-
-  preparedData.forEach((item, idx) => {
-    let currentPos = item.pos || "Từ vựng";
-    let optionsHtml = posList
-      .map(
-        (p) =>
-          `<option value="${p}" ${p === currentPos ? "selected" : ""}>${p}</option>`,
-      )
-      .join("");
-    if (!posList.includes(currentPos)) {
-      optionsHtml += `<option value="${currentPos}" selected>${currentPos}</option>`;
-    }
-
-    previewHtml += `
-            <div class="preview-item">
-              <div class="preview-word-info">
-                ${item.word} 
-                <span style="position: relative; display: inline-block; transform: translateY(-2px);">
-                  <select style="width: 125px; font-size: 11px; font-weight: 800; color: var(--primary); padding: 2px 18px 2px 6px; background: rgba(52, 152, 219, 0.08); border: 1px dashed rgba(52, 152, 219, 0.6); border-radius: 6px; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none; text-align: center; text-align-last: center; font-family: 'Nunito', sans-serif;" onchange="updateCustomPos(${idx}, this.value)">
-                    ${optionsHtml}
-                  </select>
-                  <span style="position: absolute; right: 5px; top: 4px; font-size: 10px; pointer-events: none; opacity: 0.7;">▼</span>
-                </span>
-                <span style="font-size: 13px; margin-left: 3px;">${item.ipa || "/.../"}</span>
-              </div>
-              <input type="text" class="preview-input" value="${item.definition}" onchange="updateCustomDefinition(${idx}, this.value)">
-            </div>
-          `;
-  });
-
-  previewHtml += `
-          </div>
-          <p style="font-weight:800; color:var(--primary-dark); margin-bottom:10px; text-align:center;">🎯 CHỌN CHẾ ĐỘ BẮT ĐẦU HỌC:</p>
+          <p style="font-weight:800; color:var(--primary-dark); margin-bottom:10px; text-align:center; font-size:18px;">🎯 CHỌN CHẾ ĐỘ BẮT ĐẦU HỌC:</p>
+          <p style="color:#7f8c8d; font-size:14px; margin-bottom:20px; text-align:center;\">${preparedData.length} từ vựng đã chuẩn bị sẵn sàng!</p>
           <div class="btn-group">
             <button class="main-btn btn-flashcard" onclick="startApp('flashcard')">🗂️ Lật Thẻ</button>
             <button class="main-btn btn-quiz" onclick="startApp('quiz')">📝 Trắc Nghiệm</button>
@@ -718,14 +664,6 @@ function renderPreviewHtml() {
         `;
   previewSection.innerHTML = previewHtml;
 }
-
-window.updateCustomPos = (index, value) => {
-  if (preparedData[index]) preparedData[index].pos = value.trim();
-};
-
-window.updateCustomDefinition = (index, value) => {
-  if (preparedData[index]) preparedData[index].definition = value.trim();
-};
 
 window.scrollToUnanswered = () => {
   const unanswered = document.querySelector(".question-card:not(.answered)");
@@ -999,32 +937,6 @@ function renderFlashcard() {
   const quizArea = document.getElementById("quizArea");
   let item = flashcardData[currentCardIndex];
 
-  const posList = [
-    "Danh từ (n)",
-    "Động từ (v)",
-    "Tính từ (adj)",
-    "Trạng từ (adv)",
-    "Tính/Trạng từ (adj/adv)",
-    "Đại từ (pron)",
-    "Giới từ (prep)",
-    "Liên từ (conj)",
-    "Thán từ (int)",
-    "Cụm từ",
-    "Cụm động từ",
-    "Từ vựng",
-    "Từ loại khác",
-  ];
-  let currentPos = item.pos || "Từ vựng";
-  let optionsHtml = posList
-    .map(
-      (p) =>
-        `<option value="${p}" ${p === currentPos ? "selected" : ""}>${p}</option>`,
-    )
-    .join("");
-  if (!posList.includes(currentPos)) {
-    optionsHtml += `<option value="${currentPos}" selected>${currentPos}</option>`;
-  }
-
   // Tạo chuỗi hình nền mặc định
   let defaultBg =
     "linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%)";
@@ -1037,19 +949,12 @@ function renderFlashcard() {
             <button class="speaker-btn" onclick="renderPreviewHtml()" style="margin-bottom: 20px; border-color:var(--primary); color:var(--primary-dark);">⬅️ Trở lại tùy chọn</button>
           </div>
           <div class="flashcard-wrapper">
-            <p style="color: #7f8c8d; font-weight: 600; margin-bottom: 10px;">✨ Chạm vào thẻ để lật (có thể sửa trực tiếp nghĩa & từ loại)</p>
-            <div class="flip-card" onclick="if(event.target.tagName !== 'SELECT' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'BUTTON') this.classList.toggle('flipped')">
+            <p style="color: #7f8c8d; font-weight: 600; margin-bottom: 10px;">✨ Chạm vào thẻ để lật</p>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <div class="fc-word">${item.word}</div>
-                  <div style="margin-top: 5px;">
-                    <span style="position: relative; display: inline-block;">
-                      <select style="width: auto; padding-right: 15px; font-size:14px; font-weight:700; color:var(--primary); background: rgba(52, 152, 219, 0.1); padding-top: 4px; padding-bottom: 4px; border: 1px dashed rgba(52, 152, 219, 0.6); border-radius: 8px; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; -moz-appearance: none; text-align: center; text-align-last: center; font-family: 'Nunito', sans-serif;" onchange="updateFlashcardPos(${currentCardIndex}, this.value)">
-                        ${optionsHtml}
-                      </select>
-                      <span style="position: absolute; right: 5px; top: 7px; font-size: 10px; pointer-events: none; opacity: 0.7;">▼</span>
-                    </span>
-                  </div>
+                  <div style="margin-top: 5px; font-size:12px; color:var(--primary-dark); font-weight:600;">${item.pos || "Từ vựng"}</div>
                   <div class="fc-ipa" style="margin-top:8px;">${item.ipa || "/.../"}</div>
                   <div style="display:flex; gap:15px; margin-top:10px;">
                     <button class="speaker-btn" onclick="event.stopPropagation(); speakWord('${item.word.replace(/'/g, "\\'")}', 'uk')">🇬🇧 UK</button>
@@ -1160,33 +1065,7 @@ function renderFlashcard() {
   */
 }
 
-window.updateFlashcardPos = (index, value) => {
-  if (flashcardData[index]) {
-    let val = value.trim();
-    flashcardData[index].pos = val;
-    // Đồng bộ lại với preparedData gốc trước khi lưu
-    let targetItem = preparedData.find(
-      (p) => p.word === flashcardData[index].word,
-    );
-    if (targetItem) targetItem.pos = val;
-
-    saveDeck(); // Lưu vào bộ nhớ LocalStorage
-  }
-};
-
-window.updateFlashcardDef = (index, value) => {
-  if (flashcardData[index]) {
-    let val = value.trim();
-    flashcardData[index].definition = val;
-    // Đồng bộ lại với preparedData gốc trước khi lưu
-    let targetItem = preparedData.find(
-      (p) => p.word === flashcardData[index].word,
-    );
-    if (targetItem) targetItem.definition = val;
-
-    saveDeck(); // Lưu vào bộ nhớ LocalStorage
-  }
-};
+// 🔧 Tắt chỉnh sửa trực tiếp trong flashcard (tiết kiệm localStorage)
 
 window.prevCard = () => {
   if (currentCardIndex > 0) {
