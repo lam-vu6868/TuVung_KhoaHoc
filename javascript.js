@@ -1017,8 +1017,12 @@ function renderFlashcard() {
                 </div>
               </div>
             </div>
-            <div style="display:flex; align-items:center; gap:20px; margin-top:30px;">
+            <div style="display:flex; align-items:center; gap:15px; margin-top:30px; flex-wrap:wrap; justify-content:center;">
               <button class="speaker-btn" onclick="prevCard()" ${currentCardIndex === 0 ? "disabled" : ""}>⬅️ Trước</button>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <label style="font-weight:600; color:var(--text-color); font-size:14px;">Đến thẻ:</label>
+                <input type="number" id="cardJumpInput" min="1" max="${flashcardData.length}" value="${currentCardIndex + 1}" style="width:60px; padding:6px 10px; border:2px solid var(--primary); border-radius:6px; font-weight:700; text-align:center; font-size:14px;" onkeypress="if(event.key==='Enter') jumpToCard()">
+              </div>
               <span style="font-weight:800; font-size:18px; color:var(--text-color)">${currentCardIndex + 1} / ${flashcardData.length}</span>
               <button class="speaker-btn" onclick="nextCard()" ${currentCardIndex === flashcardData.length - 1 ? "disabled" : ""}>Sau ➡️</button>
             </div>
@@ -1139,6 +1143,22 @@ window.nextCard = () => {
     currentCardIndex++;
     renderFlashcard();
   }
+};
+window.jumpToCard = () => {
+  let input = document.getElementById("cardJumpInput");
+  if (!input) return;
+
+  let cardNumber = parseInt(input.value);
+  let maxCard = flashcardData.length;
+
+  if (isNaN(cardNumber) || cardNumber < 1 || cardNumber > maxCard) {
+    showToast(`Vui lòng nhập số từ 1 đến ${maxCard}`, "error");
+    input.value = currentCardIndex + 1;
+    return;
+  }
+
+  currentCardIndex = cardNumber - 1;
+  renderFlashcard();
 };
 
 function showStatistics(mode) {
