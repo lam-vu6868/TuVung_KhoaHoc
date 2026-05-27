@@ -1789,8 +1789,7 @@ const courseData = [
             ipa: "/ʃɪp/",
             definition: "tàu lớn",
             example: "The cargo ship arrived.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "train",
@@ -1822,8 +1821,7 @@ const courseData = [
             ipa: "/ˈbaɪsɪkl/",
             definition: "xe đạp",
             example: "She rides a bicycle.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "truck",
@@ -1887,8 +1885,7 @@ const courseData = [
             ipa: "/ˈbɪldɪŋ/",
             definition: "tòa nhà",
             example: "The office building is tall.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "bridge",
@@ -1952,8 +1949,7 @@ const courseData = [
             ipa: "/tʃer/",
             definition: "ghế",
             example: "She is sitting on a chair.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "table",
@@ -1961,8 +1957,7 @@ const courseData = [
             ipa: "/ˈteɪbl/",
             definition: "bàn",
             example: "The book is on the table.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "furniture",
@@ -1987,8 +1982,7 @@ const courseData = [
             ipa: "/drɔːr/",
             definition: "ngăn kéo",
             example: "The files are in the drawer.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "cabinet",
@@ -1996,8 +1990,7 @@ const courseData = [
             ipa: "/ˈkæbɪnət/",
             definition: "tủ",
             example: "The dishes are in the cabinet.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "light",
@@ -2166,8 +2159,7 @@ const courseData = [
             ipa: "/fuːd/",
             definition: "thức ăn",
             example: "The food looks delicious.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "dish",
@@ -2175,8 +2167,7 @@ const courseData = [
             ipa: "/dɪʃ/",
             definition: "món ăn; cái đĩa",
             example: "She served a traditional dish.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "plant",
@@ -2830,8 +2821,7 @@ const courseData = [
             ipa: "/ˈtʊə.rɪst/",
             definition: "khách du lịch",
             example: "Many tourists visit Ha Long Bay every year.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "tourism",
@@ -2864,8 +2854,7 @@ const courseData = [
             ipa: "/flaɪt/",
             definition: "chuyến bay",
             example: "Our flight to Tokyo departs at 7 p.m.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "airplane / aeroplane",
@@ -2873,8 +2862,7 @@ const courseData = [
             ipa: "/ˈeə.pleɪn/",
             definition: "máy bay",
             example: "The airplane is landing at the airport.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "airport",
@@ -2882,8 +2870,7 @@ const courseData = [
             ipa: "/ˈeə.pɔːt/",
             definition: "sân bay",
             example: "The airport was crowded this morning.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "terminal",
@@ -2899,8 +2886,7 @@ const courseData = [
             ipa: "/ɡeɪt/",
             definition: "cổng ra máy bay",
             example: "Please go to gate 15 for boarding.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "board",
@@ -2908,8 +2894,7 @@ const courseData = [
             ipa: "/bɔːd/",
             definition: "lên tàu / máy bay",
             example: "Passengers are now boarding the plane.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "boarding",
@@ -2917,8 +2902,7 @@ const courseData = [
             ipa: "/ˈbɔː.dɪŋ/",
             definition: "việc lên tàu / máy bay",
             example: "Boarding starts 45 minutes before departure.",
-            imageUrl:
-              "https://images.unsplash.com/photo-1540575467063-178f50002cbc?w=400&h=300&fit=crop",
+            imageUrl: "",
           },
           {
             word: "passport",
