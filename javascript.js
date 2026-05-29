@@ -764,7 +764,7 @@ function startApp(mode) {
     currentCardIndex = 0;
     renderFlashcard();
 
-    // 🎹 Event listener cho bàn phím (Trái/Phải)
+    // 🎹 Event listener cho bàn phím (Trái/Phải/Enter)
     window.keyboardHandler = (e) => {
       if (e.key === "ArrowLeft") {
         e.preventDefault();
@@ -772,6 +772,12 @@ function startApp(mode) {
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
         nextCard();
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        const flipCard = document.querySelector(".flip-card");
+        if (flipCard) {
+          flipCard.classList.toggle("flipped");
+        }
       }
     };
     document.addEventListener("keydown", window.keyboardHandler);
