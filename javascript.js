@@ -651,6 +651,12 @@ function renderPreviewHtml() {
   document.getElementById("statsArea").style.display = "none";
   document.getElementById("progressContainer").style.display = "none";
 
+  // 🎹 Xóa keyboard handler khi rời Flashcard
+  if (window.keyboardHandler) {
+    document.removeEventListener("keydown", window.keyboardHandler);
+    window.keyboardHandler = null;
+  }
+
   // 🔧 Bỏ preview section, đi thẳng vào chọn mode
   let previewHtml = `
           <p style="font-weight:900; color:var(--primary-dark); margin-bottom:8px; text-align:center; font-size:24px;">🎯 CHỌN CHẾ ĐỘ HỌC</p>
@@ -684,6 +690,12 @@ window.removeFixedButtonBar = () => {
 };
 
 window.goBackToDashboard = () => {
+  // 🎹 Xóa keyboard handler khi rời Flashcard
+  if (window.keyboardHandler) {
+    document.removeEventListener("keydown", window.keyboardHandler);
+    window.keyboardHandler = null;
+  }
+
   window.removeFixedButtonBar();
   document.getElementById("previewSection").style.display = "none";
   document.getElementById("quizArea").innerHTML = "";
@@ -751,6 +763,18 @@ function startApp(mode) {
     flashcardData = localData;
     currentCardIndex = 0;
     renderFlashcard();
+
+    // 🎹 Event listener cho bàn phím (Trái/Phải)
+    window.keyboardHandler = (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevCard();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        nextCard();
+      }
+    };
+    document.addEventListener("keydown", window.keyboardHandler);
   } else {
     totalQuestions = localData.length;
     answeredQuestions = 0;
