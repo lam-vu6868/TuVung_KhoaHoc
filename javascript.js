@@ -783,14 +783,14 @@ function startApp(mode) {
         // Nghe tiếng Anh (UK)
         const currentWord = flashcardData[currentCardIndex];
         if (currentWord) {
-          speakWord(currentWord.word, 'uk');
+          speakWord(currentWord.word, "uk");
         }
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
         // Nghe tiếng Anh (US)
         const currentWord = flashcardData[currentCardIndex];
         if (currentWord) {
-          speakWord(currentWord.word, 'us');
+          speakWord(currentWord.word, "us");
         }
       }
     };
@@ -996,6 +996,9 @@ function renderFlashcard() {
           </div>
           <div class="flashcard-wrapper">
             <p style="color: #7f8c8d; font-weight: 600; margin-bottom: 10px;">✨ Chạm vào thẻ để lật</p>
+            <p style="color: #95a5a6; font-size: 12px; margin-bottom: 20px; text-align: center; line-height: 1.5;">
+              📱 <b>Phím tắt:</b> ← Trước | → Sau | Enter Lật | ⬆️ UK | ⬇️ US
+            </p>
             <div class="flip-card" onclick="this.classList.toggle('flipped')">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
