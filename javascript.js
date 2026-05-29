@@ -764,7 +764,7 @@ function startApp(mode) {
     currentCardIndex = 0;
     renderFlashcard();
 
-    // 🎹 Event listener cho bàn phím (Trái/Phải/Enter)
+    // 🎹 Event listener cho bàn phím (Trái/Phải/Enter/Lên/Xuống)
     window.keyboardHandler = (e) => {
       if (e.key === "ArrowLeft") {
         e.preventDefault();
@@ -777,6 +777,20 @@ function startApp(mode) {
         const flipCard = document.querySelector(".flip-card");
         if (flipCard) {
           flipCard.classList.toggle("flipped");
+        }
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        // Nghe tiếng Anh (UK)
+        const currentWord = flashcardData[currentCardIndex];
+        if (currentWord) {
+          speakWord(currentWord.word, 'uk');
+        }
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        // Nghe tiếng Anh (US)
+        const currentWord = flashcardData[currentCardIndex];
+        if (currentWord) {
+          speakWord(currentWord.word, 'us');
         }
       }
     };
