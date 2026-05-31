@@ -1018,9 +1018,13 @@ function renderFlashcard() {
                 <div class="flip-card-back" id="fcBackBg_${currentCardIndex}" style="${cardBackStyle}">
                   <div class="fc-def-container" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; position: relative; padding: 0;">
                     <!-- Ví dụ ở góc dưới phải -->
-                    ${item.example ? `<div style="position: absolute; bottom: 15px; right: 15px; text-align: right; max-width: 45%; z-index: 10; background: rgba(0,0,0,0.6); padding: 12px 14px; border-radius: 10px; backdrop-filter: blur(5px); border-left: 3px solid var(--secondary);">
+                    ${
+                      item.example
+                        ? `<div style="position: absolute; bottom: 15px; right: 15px; text-align: right; max-width: 45%; z-index: 10; background: rgba(0,0,0,0.6); padding: 12px 14px; border-radius: 10px; backdrop-filter: blur(5px); border-left: 3px solid var(--secondary);">
                       <div style="color: #f1f2f6; font-size: 13px; font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); line-height: 1.4;">"${item.example}"</div>
-                    </div>` : ""}
+                    </div>`
+                        : ""
+                    }
                   </div>
                 </div>
               </div>
