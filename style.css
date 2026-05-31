@@ -427,8 +427,8 @@ textarea:focus {
 .flip-card {
   background-color: transparent;
   width: 100%;
-  max-width: 450px;
-  height: 280px;
+  max-width: 520px;
+  height: 420px;
   perspective: 1000px;
   cursor: pointer;
 }
@@ -456,7 +456,7 @@ textarea:focus {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
 }
 .flip-card-front {
@@ -475,16 +475,16 @@ textarea:focus {
   border: 3px solid var(--secondary-dark);
 }
 .fc-word {
-  font-size: 38px;
+  font-size: 46px;
   font-weight: 800;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: var(--secondary-dark);
   word-break: break-word;
 }
 .fc-ipa {
-  font-size: 22px;
+  font-size: 16px;
   color: #95a5a6;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   letter-spacing: 1px;
 }
 .fc-def {
@@ -510,6 +510,13 @@ textarea:focus {
     min-height: 90px;
     font-size: 14px;
     padding: 14px 12px;
+  }
+  .flip-card {
+    max-width: 100%;
+    height: 350px;
+  }
+  .fc-word {
+    font-size: 36px;
   }
 }
 

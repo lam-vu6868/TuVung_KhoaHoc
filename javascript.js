@@ -1003,22 +1003,24 @@ function renderFlashcard() {
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <div class="fc-word">${item.word}</div>
-                  <div style="margin-top: 5px; font-size:12px; color:var(--primary-dark); font-weight:600;">${item.pos || "Từ vựng"}</div>
-                  <div class="fc-ipa" style="margin-top:8px;">${item.ipa || "/.../"}</div>
-                  <div style="display:flex; gap:15px; margin-top:10px;">
+                  <div style="color: #2c3e50; font-size: 24px; font-weight: 700; margin: 15px 0 10px 0; text-align: center; line-height: 1.4;">
+                    ${item.definition}
+                  </div>
+                  <div style="margin-top: 12px; font-size: 12px; color: var(--primary-dark); font-weight: 600; text-align: center;">
+                    ${item.pos || "Từ vựng"}
+                  </div>
+                  <div class="fc-ipa" style="margin-top: 6px; font-size: 14px;">${item.ipa || "/.../"}</div>
+                  <div style="display:flex; gap:15px; margin-top:15px; justify-content:center;">
                     <button class="speaker-btn" onclick="event.stopPropagation(); speakWord('${item.word.replace(/'/g, "\\'")}', 'uk')">🇬🇧 UK</button>
                     <button class="speaker-btn" onclick="event.stopPropagation(); speakWord('${item.word.replace(/'/g, "\\'")}', 'us')">🇺🇸 US</button>
                   </div>
                 </div>
                 <div class="flip-card-back" id="fcBackBg_${currentCardIndex}" style="${cardBackStyle}">
-                  <div class="fc-def-container" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; position: relative; padding: 0;">
-                    <!-- Định nghĩa và ví dụ ở góc dưới phải -->
-                    <div style="position: absolute; bottom: 15px; right: 15px; text-align: right; max-width: 40%; z-index: 10; background: rgba(0,0,0,0.5); padding: 10px 12px; border-radius: 8px; backdrop-filter: blur(5px);">
-                      <div style="color: #ffffff; font-size: 15px; font-weight: 700; margin-bottom: 6px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); line-height: 1.3;">
-                        ${item.definition}
-                      </div>
-                      ${item.example ? `<div style="color: #f1f2f6; font-size: 13px; font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); line-height: 1.3;">"${item.example}"</div>` : ""}
-                    </div>
+                  <div class="fc-def-container" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; position: relative; padding: 0;">
+                    <!-- Ví dụ ở góc dưới phải -->
+                    ${item.example ? `<div style="position: absolute; bottom: 15px; right: 15px; text-align: right; max-width: 45%; z-index: 10; background: rgba(0,0,0,0.6); padding: 12px 14px; border-radius: 10px; backdrop-filter: blur(5px); border-left: 3px solid var(--secondary);">
+                      <div style="color: #f1f2f6; font-size: 13px; font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); line-height: 1.4;">"${item.example}"</div>
+                    </div>` : ""}
                   </div>
                 </div>
               </div>
