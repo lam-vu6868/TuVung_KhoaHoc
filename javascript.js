@@ -766,6 +766,11 @@ function startApp(mode) {
 
     // 🎹 Event listener cho bàn phím (Trái/Phải/Enter/Lên/Xuống)
     window.keyboardHandler = (e) => {
+      // Check nếu focus ở input field, thì skip keyboard shortcuts
+      if (document.activeElement.id === "cardJumpInput") {
+        return;
+      }
+
       if (e.key === "ArrowLeft") {
         e.preventDefault();
         prevCard();
