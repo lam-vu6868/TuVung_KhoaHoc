@@ -4845,7 +4845,7 @@ const courseData = [
           {
             word: "inventory",
             pos: "Danh từ (n)",
-            ipa: "/ˈɪnvəntri/",
+            ipa: "/ɪn.vən.tɔːr.i/",
             definition: "hàng tồn kho",
             example: "The manager checked the food inventory daily.",
             imageUrl: "",
