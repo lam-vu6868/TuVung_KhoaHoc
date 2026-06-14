@@ -5021,7 +5021,7 @@ const courseData = [
           {
             word: "make a reservation",
             pos: "Cụm động từ",
-            ipa: "/ˌrez.əˈveɪ.ʃən/",
+            ipa: "/meɪk ə ˌrez.ɚˈveɪ.ʃən/",
             definition: "đặt chỗ trước",
             example: "I made a reservation for 8 p.m.",
             imageUrl: "",
