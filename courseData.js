@@ -5053,7 +5053,7 @@ const courseData = [
           {
             word: "complimentary drink",
             pos: "Cụm danh từ",
-            ipa: "/ˌkɒmplɪˈmen.tər.i/",
+            ipa: "/kɑːm.pləˈmen.t̬ɚ.i drɪŋk/",
             definition: "đồ uống miễn phí",
             example: "Guests receive a complimentary drink.",
             imageUrl: "",
