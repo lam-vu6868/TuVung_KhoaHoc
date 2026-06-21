@@ -4901,7 +4901,7 @@ const courseData = [
           {
             word: "contaminate",
             pos: "Động từ (v)",
-            ipa: "/kənˈtæmɪneɪt/",
+            ipa: "/kənˈtæməneɪt/",
             definition: "làm ô nhiễm",
             example: "Raw meat can contaminate other foods.",
             imageUrl: "",
