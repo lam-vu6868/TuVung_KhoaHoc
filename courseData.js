@@ -4893,7 +4893,7 @@ const courseData = [
           {
             word: "contamination",
             pos: "Danh từ (n)",
-            ipa: "/kənˌtæmɪˈneɪʃn/",
+            ipa: "/kən,tæmi'nei∫n/",
             definition: "sự ô nhiễm, nhiễm khuẩn",
             example: "The restaurant was closed due to contamination.",
             imageUrl: "",
