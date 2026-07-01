@@ -4902,7 +4902,7 @@ const courseData = [
             word: "contaminate",
             pos: "Động từ (v)",
             ipa: "/kənˈtæməneɪt/",
-            definition: "làm ô nhiễm",
+            definition: "làm ô nhiễm",  
             example: "Raw meat can contaminate other foods.",
             imageUrl: "",
           },
@@ -5758,7 +5758,7 @@ const courseData = [
           {
             word: "obligatory",
             pos: "Tính từ (adj)",
-            ipa: "/ˈɒblɪɡeɪtɪd/",
+            ipa: "/ˈəˈblɪɡ.ə.tɔːr.i/",
             definition: "bắt buộc",
             example:
               "The medical examination before you start work is obligatory.",
